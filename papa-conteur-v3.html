@@ -397,8 +397,9 @@ Return ONLY the JSON array. No explanation.`;
 
 function buildImageUrl(keywords, charDesc, idx) {
   const seed = Math.floor(Math.random() * 999999) + 1;
-  const prompt = `Cinematic dark photography, mysterious african night, ${keywords}, ${charDesc || 'african person'}, old african village atmosphere, moonlight, dramatic shadows, deep fog, ultra realistic, 8k quality, no cartoon, no drawing, no painting`;
-  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=576&height=1024&nologo=true&model=flux&seed=${seed}`;
+  const seed = Math.floor(Math.random() * 99999) + 1000 + idx * 111;
+  const prompt = `cinematic african scene, ${keywords}, ${charDesc || 'african person'}, dramatic lighting, realistic, 8k`;
+  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=576&height=1024&nologo=true&seed=${seed}`;
 }
 
 // ═══════════════════════════════════════
@@ -553,7 +554,7 @@ async function generateVideo(imageUrls, audioBlob, onProgress) {
       if (!url) { res(null); return; }
       const img = new Image();
       img.crossOrigin = 'anonymous';
-      const t = setTimeout(() => res(null), 25000);
+      const t = setTimeout(() => res(null), 45000);
       img.onload = () => { clearTimeout(t); res(img); };
       img.onerror = () => { clearTimeout(t); res(null); };
       // Force reload with cache bust if needed
@@ -1363,7 +1364,7 @@ async function loadImageWithRetry(url, maxRetries = 4) {
         // Change seed on retry
         const newSeed = Math.floor(Math.random() * 999999) + 1;
         url = url.replace(/seed=\d+/, `seed=${newSeed}`);
-        await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
+        await new Promise(r => setTimeout(r, 4000 * (attempt + 1)));
       }
     }
   }
@@ -1377,6 +1378,17 @@ async function doGenerateAllImages() {
   initSegments();
   state.studio.segments = state.studio.segments.map(s => ({ ...s, status: 'loading', imageUrl: '', retries: 0 }));
   render();
+
+  // ✅ Test de connectivité Pollinations
+  try {
+    const testImg = new Image();
+    await new Promise((res, rej) => {
+      const t = setTimeout(() => rej(new Error('Pollinations inaccessible')), 12000);
+      testImg.onload = () => { clearTimeout(t); res(); };
+      testImg.onerror = () => { clearTimeout(t); res(); }; // continue even on error
+      testImg.src = 'https://image.pollinations.ai/prompt/test?width=64&height=64&seed=1&nologo=true';
+    });
+  } catch(e) { /* continue anyway */ }
 
   try {
     const proj = getCurrentProject();
@@ -1442,7 +1454,7 @@ async function doGenerateAllImages() {
 
       // ✅ Délai entre chaque image pour éviter le rate limit
       if (i < state.studio.segments.length - 1) {
-        await new Promise(r => setTimeout(r, 1500));
+        await new Promise(r => setTimeout(r, 3000));
       }
     }
 
