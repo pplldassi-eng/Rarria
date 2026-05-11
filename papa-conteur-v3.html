@@ -187,18 +187,13 @@ audio::-webkit-media-controls-panel{background:var(--bg3)}
 // ═══════════════════════════════════════
 // CONFIG
 // ═══════════════════════════════════════
-// ⚙️ Clé API — saisie dans l'app ou stockée en localStorage
 function getGeminiKey() {
   return localStorage.getItem('papaconteur_gemini_key') || '';
 }
 function getGeminiUrl() {
   const key = getGeminiKey();
-  // Modèle stable et gratuit : gemini-pro
   return `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`;
 }
-const GEMINI_KEY = getGeminiKey(); // kept for compatibility
-const GEMINI_URL = getGeminiUrl();
-const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
 
 // ═══════════════════════════════════════
 // STATE
@@ -395,11 +390,18 @@ Return ONLY the JSON array. No explanation.`;
   return segments.map(() => 'mysterious african night, dramatic shadows, moonlight, fog');
 }
 
+// ═══════════════════════════════════════
+// IMAGE URL BUILDER — SEED FIXE PAR PROJET
+// ═══════════════════════════════════════
 function buildImageUrl(keywords, charDesc, idx) {
-  const seed = Math.floor(Math.random() * 999999) + 1;
-  const seed = Math.floor(Math.random() * 99999) + 1000 + idx * 111;
+  // Récupérer le seed de base du projet (cohérence visuelle)
+  const proj = getCurrentProject();
+  const baseSeed = proj?.seed || 42567;
+  // Chaque scène a un seed dérivé du seed de base
+  const sceneSeed = baseSeed + idx * 111;
+  
   const prompt = `cinematic african scene, ${keywords}, ${charDesc || 'african person'}, dramatic lighting, realistic, 8k`;
-  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=576&height=1024&nologo=true&seed=${seed}`;
+  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=576&height=1024&nologo=true&seed=${sceneSeed}`;
 }
 
 // ═══════════════════════════════════════
@@ -499,7 +501,7 @@ function createSilentWav(sampleRate, numSamples) {
 function audioBufferToWav(buffer) {
   const numChannels = 1;
   const sampleRate = buffer.sampleRate;
-  const format = 1; // PCM
+  const format = 1;
   const bitDepth = 16;
   const samples = buffer.getChannelData(0);
   const bytesPerSample = bitDepth / 8;
@@ -548,7 +550,6 @@ async function generateVideo(imageUrls, audioBlob, onProgress) {
     canvas.width = W; canvas.height = H;
     const ctx = canvas.getContext('2d');
 
-    // ✅ Précharger toutes les images AVANT de démarrer l'enregistrement
     onProgress(5, 'Préchargement des images...');
     const imgs = await Promise.all(imageUrls.map((url, i) => new Promise(res => {
       if (!url) { res(null); return; }
@@ -557,7 +558,6 @@ async function generateVideo(imageUrls, audioBlob, onProgress) {
       const t = setTimeout(() => res(null), 45000);
       img.onload = () => { clearTimeout(t); res(img); };
       img.onerror = () => { clearTimeout(t); res(null); };
-      // Force reload with cache bust if needed
       img.src = url.includes('?') ? url + '&t=' + Date.now() : url + '?t=' + Date.now();
     })));
 
@@ -566,7 +566,6 @@ async function generateVideo(imageUrls, audioBlob, onProgress) {
 
     if (validImgs.length === 0) { reject(new Error('Aucune image valide')); return; }
 
-    // ✅ Setup audio avec AudioContext pour vraie fusion
     onProgress(18, 'Préparation audio...');
     const audioUrl = URL.createObjectURL(audioBlob);
     const audioEl = new Audio(audioUrl);
@@ -576,7 +575,7 @@ async function generateVideo(imageUrls, audioBlob, onProgress) {
     await new Promise(res => {
       audioEl.onloadedmetadata = res;
       audioEl.onerror = () => res();
-      setTimeout(res, 5000); // timeout fallback
+      setTimeout(res, 5000);
       audioEl.load();
     });
 
@@ -585,7 +584,6 @@ async function generateVideo(imageUrls, audioBlob, onProgress) {
 
     onProgress(20, 'Démarrage du montage...');
 
-    // ✅ AudioContext pour capturer la voix dans la vidéo
     let audioTrack = null;
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -599,7 +597,6 @@ async function generateVideo(imageUrls, audioBlob, onProgress) {
     const videoStream = canvas.captureStream(30);
     if (audioTrack) videoStream.addTrack(audioTrack);
 
-    // Choose best codec
     const mimeTypes = ['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];
     const mimeType = mimeTypes.find(m => MediaRecorder.isTypeSupported(m)) || '';
 
@@ -616,10 +613,8 @@ async function generateVideo(imageUrls, audioBlob, onProgress) {
       p => ({ sx: 1 + p * 0.10, tx: -p * 5,  ty: p * 10  }),
     ];
 
-    // Draw initial black frame
     ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
 
-    // ✅ Démarrer la voix au même moment que l'enregistrement
     await audioEl.play().catch(() => {});
     const startTime = performance.now();
 
@@ -640,7 +635,6 @@ async function generateVideo(imageUrls, audioBlob, onProgress) {
         ctx.restore();
       }
 
-      // Gradient + watermark
       const grad = ctx.createLinearGradient(0, H*0.7, 0, H);
       grad.addColorStop(0, 'rgba(0,0,0,0)');
       grad.addColorStop(1, 'rgba(0,0,0,0.6)');
@@ -708,7 +702,7 @@ function viewHome() {
         <button class="btn btn-gold" id="btn-save-key" style="white-space:nowrap;padding:.75rem 1rem;">💾 Sauver</button>
       </div>
       <p style="font-size:.72rem;color:var(--text3);margin-top:.5rem;">
-        Clé gratuite sur <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--gold);">aistudio.google.com</a> · Modèle : gemini-pro
+        Clé gratuite sur <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--gold);">aistudio.google.com</a> · Modèle : gemini-2.5-flash
       </p>
     </div>
 
@@ -725,6 +719,7 @@ function viewHome() {
         <div class="project-card-meta">
           <span class="tag tag-gold">👤 ${p.characters.length} personnage${p.characters.length>1?'s':''}</span>
           <span class="tag tag-primary">🎬 ${p.episodes.length} épisode${p.episodes.length>1?'s':''}</span>
+          <span class="tag tag-gold" style="font-size:.65rem;">Seed: ${p.seed || '?'}</span>
         </div>
         <div class="project-card-actions">
           <button class="btn btn-gold btn-sm" data-open="${p.id}">Ouvrir</button>
@@ -765,7 +760,7 @@ function viewProject() {
     <button class="header-back" id="btn-back-home">←</button>
     <div class="header-title">
       ${proj.name}
-      <div class="header-sub">Série</div>
+      <div class="header-sub">Série · Seed visuel: ${proj.seed || '?'}</div>
     </div>
   </div>
 
@@ -1034,7 +1029,7 @@ function viewStudio() {
     <button class="header-back" id="btn-back-project">←</button>
     <div class="header-title">
       ${ep?.title || 'Nouvel épisode'}
-      <div class="header-sub">${proj?.name || ''}</div>
+      <div class="header-sub">${proj?.name || ''} · Seed: ${proj?.seed || '?'}</div>
     </div>
   </div>
   <div class="studio-content">
@@ -1047,7 +1042,6 @@ function viewStudio() {
 // EVENT HANDLERS
 // ═══════════════════════════════════════
 function attachEvents() {
-  // HOME
   // HOME — SAVE API KEY
   on('btn-save-key', 'click', () => {
     const input = $('gemini-key-input');
@@ -1179,6 +1173,7 @@ function createProject() {
     description: $('new-project-desc')?.value?.trim() || '',
     characters: [],
     episodes: [],
+    seed: Math.floor(10000 + Math.random() * 90000), // ✅ SEED FIXE POUR LA SÉRIE
     createdAt: new Date().toISOString()
   };
   state.projects.unshift(proj);
@@ -1326,11 +1321,9 @@ async function doGenerateAudio() {
     state.studio.audioUrl = url;
     state.studio.isGeneratingAudio = false;
 
-    // Save reference (base64 too large, just keep blob URL in session)
     updateEpisode({ audioUrl: url });
     render();
 
-    // Get duration
     setTimeout(() => {
       const audioEl = $('audio-preview');
       if (audioEl) {
@@ -1379,17 +1372,6 @@ async function doGenerateAllImages() {
   state.studio.segments = state.studio.segments.map(s => ({ ...s, status: 'loading', imageUrl: '', retries: 0 }));
   render();
 
-  // ✅ Test de connectivité Pollinations
-  try {
-    const testImg = new Image();
-    await new Promise((res, rej) => {
-      const t = setTimeout(() => rej(new Error('Pollinations inaccessible')), 12000);
-      testImg.onload = () => { clearTimeout(t); res(); };
-      testImg.onerror = () => { clearTimeout(t); res(); }; // continue even on error
-      testImg.src = 'https://image.pollinations.ai/prompt/test?width=64&height=64&seed=1&nologo=true';
-    });
-  } catch(e) { /* continue anyway */ }
-
   try {
     const proj = getCurrentProject();
     const chars = proj ? proj.characters : [];
@@ -1406,13 +1388,12 @@ async function doGenerateAllImages() {
     const mainChar = chars.find(c => c.role === 'Principal') || chars[0];
     const charDesc = mainChar ? mainChar.description : '';
 
-    // ✅ Chargement SÉQUENTIEL — une image à la fois avec délai
+    // ✅ Chargement SÉQUENTIEL — une image à la fois
     for (let i = 0; i < state.studio.segments.length; i++) {
       const baseUrl = buildImageUrl(keywords[i] || keywords[0] || 'mysterious african', charDesc, i);
       state.studio.segments[i].imageUrl = baseUrl;
       state.studio.segments[i].status = 'loading';
 
-      // Update slot display immediately
       const slot = $(`slot-${i}`);
       if (slot) {
         slot.innerHTML = `<div class="img-loading"><div class="spinner"></div></div>`;
@@ -1424,7 +1405,6 @@ async function doGenerateAllImages() {
       if (loadedUrl) {
         state.studio.segments[i].imageUrl = loadedUrl;
         state.studio.segments[i].status = 'done';
-        // Show in slot
         if (slot) {
           slot.innerHTML = `
             <img src="${loadedUrl}" alt="" style="width:100%;height:100%;object-fit:cover">
@@ -1452,9 +1432,9 @@ async function doGenerateAllImages() {
       const counter = document.querySelector('.img-counter');
       if (counter) counter.textContent = `${readyCount}/${state.studio.segments.length} images chargées`;
 
-      // ✅ Délai entre chaque image pour éviter le rate limit
+      // ✅ Délai réduit entre chaque image
       if (i < state.studio.segments.length - 1) {
-        await new Promise(r => setTimeout(r, 3000));
+        await new Promise(r => setTimeout(r, 1500));
       }
     }
 
@@ -1469,7 +1449,7 @@ async function doGenerateAllImages() {
   }
 }
 
-// Called by img onload/onerror (kept for manual regen)
+// Called by img onload/onerror
 window.onImageLoad = function(idx) {
   if (state.studio.segments[idx]) {
     state.studio.segments[idx].status = 'done';
