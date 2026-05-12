@@ -71,52 +71,44 @@ h1,h2,h3{font-family:'Playfair Display',serif}
 .hero-icon{font-size:3.5rem;margin-bottom:1rem;display:block}
 .hero h1{font-size:2.2rem;margin-bottom:.5rem}
 .hero p{color:var(--text2);font-size:1rem;max-width:320px;margin:0 auto}
-.projects-grid{padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
-.project-card{background:var(--bg2);border:1px solid rgba(196,146,58,.15);border-radius:var(--radius2);padding:1.5rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.projects-grid{padding:1.5rem}
+.project-card{background:var(--bg2);border:1px solid rgba(196,146,58,.15);border-radius:var(--radius2);padding:1.5rem;cursor:pointer;transition:all .2s;margin-bottom:1rem}
 .project-card:hover{border-color:rgba(196,146,58,.4);transform:translateY(-2px)}
 .project-card-name{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:.5rem}
 .project-card-meta{display:flex;gap:.75rem;flex-wrap:wrap}
 .project-card-actions{display:flex;gap:.5rem;margin-top:1rem}
 .char-card{background:var(--bg3);border:1px solid rgba(61,35,20,.7);border-radius:var(--radius);padding:1rem;display:flex;align-items:center;gap:1rem;margin-bottom:.5rem}
 .char-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--gold));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-.char-info{flex:1;min-width:0}
-.char-name{font-weight:700;margin-bottom:.2rem}
-.char-desc{font-size:.8rem;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.char-btn{background:var(--brown);border:none;color:var(--text2);width:32px;height:32px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.char-info{flex:1}
+.char-name{font-weight:700}
+.char-desc{font-size:.8rem;color:var(--text3)}
+.char-btn{background:var(--brown);border:none;color:var(--text2);width:32px;height:32px;border-radius:8px;cursor:pointer}
 .char-btn.del:hover{background:#8B1A1A}
-.ep-card{background:var(--bg3);border:1px solid rgba(61,35,20,.5);border-radius:var(--radius);padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:all .2s;margin-bottom:.5rem}
-.ep-card:hover{border-color:rgba(196,146,58,.3);background:var(--bg2)}
-.ep-num{width:40px;height:40px;border-radius:50%;background:var(--brown);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0}
+.ep-card{background:var(--bg3);border:1px solid rgba(61,35,20,.5);border-radius:var(--radius);padding:1rem;display:flex;align-items:center;gap:1rem;cursor:pointer;margin-bottom:.5rem}
+.ep-card:hover{border-color:rgba(196,146,58,.3)}
+.ep-num{width:40px;height:40px;border-radius:50%;background:var(--brown);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
 .ep-info{flex:1}
-.ep-title{font-weight:700;margin-bottom:.2rem}
+.ep-title{font-weight:700}
 .ep-status{font-size:.75rem;color:var(--text3)}
 .studio-content{padding:1.5rem;flex:1}
-.field-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem}
+.field-group{margin-bottom:1.2rem}
 .ton-selector{display:flex;gap:.75rem}
-.ton-btn{flex:1;padding:.75rem;background:var(--brown);border:2px solid transparent;border-radius:var(--radius);color:var(--text2);font-family:'Barlow',sans-serif;font-weight:700;cursor:pointer;transition:all .2s}
+.ton-btn{flex:1;padding:.75rem;background:var(--brown);border:2px solid transparent;border-radius:var(--radius);color:var(--text2);font-weight:700;cursor:pointer;transition:all .2s}
 .ton-btn.active{background:rgba(232,93,38,.2);border-color:var(--primary);color:var(--primary)}
-.alert{padding:1rem;border-radius:var(--radius);font-size:.9rem;display:flex;align-items:flex-start;gap:.75rem;margin-bottom:1rem}
+.alert{padding:1rem;border-radius:var(--radius);font-size:.9rem;margin-bottom:1rem}
 .alert-error{background:rgba(139,26,26,.2);border:1px solid rgba(139,26,26,.5);color:#ff8080}
 .alert-success{background:rgba(34,85,34,.2);border:1px solid rgba(34,85,34,.5);color:#80cc80}
 .alert-info{background:rgba(196,146,58,.1);border:1px solid rgba(196,146,58,.3);color:var(--gold)}
-.audio-player{background:var(--bg3);border:1px solid var(--brown);border-radius:var(--radius);padding:1rem;display:flex;flex-direction:column;gap:.75rem;margin-bottom:1rem}
-audio{width:100%;height:36px;outline:none}
+.audio-player{background:var(--bg3);border:1px solid var(--brown);border-radius:var(--radius);padding:1rem;margin-bottom:1rem}
+audio{width:100%;height:36px}
 .sep{height:1px;background:rgba(196,146,58,.1);margin:1.5rem 0}
-
-/* ═══ IMAGE GRID ═══ */
 .images-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
-.img-slot{aspect-ratio:9/16;background:var(--bg3);border:2px solid var(--brown);border-radius:var(--radius);overflow:hidden;position:relative;transition:border-color .3s}
+.img-slot{aspect-ratio:9/16;background:var(--bg3);border:2px solid var(--brown);border-radius:var(--radius);overflow:hidden;position:relative}
 .img-slot.done{border-color:rgba(196,146,58,.5)}
-.img-slot.error{border-color:rgba(139,26,26,.5)}
-.img-slot img{width:100%;height:100%;object-fit:cover;display:block}
+.img-slot img{width:100%;height:100%;object-fit:cover}
 .img-slot-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;opacity:0;transition:opacity .2s}
 .img-slot:hover .img-slot-overlay{opacity:1}
-.img-slot-body{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.5rem}
-.img-slot-label{font-size:.65rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;text-align:center}
-.img-slot-num{font-size:1.8rem;font-weight:900;color:var(--brown);font-family:'Playfair Display',serif}
-.img-counter-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
-
-/* Utils */
+.img-slot-body{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
 .flex{display:flex}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-1{gap:.5rem}.gap-2{gap:1rem}.flex-1{flex:1}
 .mt-1{margin-top:.5rem}.mt-2{margin-top:1rem}.mt-3{margin-top:1.5rem}
 .mb-1{margin-bottom:.5rem}.mb-2{margin-bottom:1rem}.mb-3{margin-bottom:1.5rem}
@@ -129,18 +121,13 @@ audio{width:100%;height:36px;outline:none}
 <div id="app"></div>
 
 <script>
-'use strict';
 // ═══════════════════════════════════════
 // HELPERS
 // ═══════════════════════════════════════
 const $  = id => document.getElementById(id);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const uid  = () => Date.now().toString(36) + Math.random().toString(36).slice(2);
-
-// ═══════════════════════════════════════
-// GEMINI KEY
-// ═══════════════════════════════════════
-const getKey = () => localStorage.getItem('pc_gemini_key') || '';
+const getKey = () => localStorage.getItem('pc_v5_key') || '';
 
 // ═══════════════════════════════════════
 // STATE
@@ -157,10 +144,9 @@ function freshStudio() {
   return {
     step:1, title:'', script:'', ton:'Mystérieux',
     audioBlob:null, audioUrl:null, audioDuration:0,
-    segments:[], // {text, prompt, imgUrl, status:'idle'|'loading'|'done'|'error'}
+    segments:[],
     videoUrl:null, videoBlob:null,
-    busy:false, error:null,
-    imgProgress:0, imgTotal:0
+    busy:false, error:null
   };
 }
 
@@ -168,17 +154,17 @@ function freshStudio() {
 // PERSIST
 // ═══════════════════════════════════════
 function loadState() {
-  try { const d = JSON.parse(localStorage.getItem('pc_v4')||'{}'); S.projects = d.projects||[]; } catch(e){ S.projects=[]; }
+  try { const d=JSON.parse(localStorage.getItem('pc_v5')||'{}'); S.projects=d.projects||[]; } catch(e){ S.projects=[]; }
 }
 function saveState() {
-  try { localStorage.setItem('pc_v4', JSON.stringify({projects:S.projects})); } catch(e){}
+  try { localStorage.setItem('pc_v5', JSON.stringify({projects:S.projects})); } catch(e){}
 }
 
 // ═══════════════════════════════════════
 // PROJECT / EPISODE HELPERS
 // ═══════════════════════════════════════
-const getProj  = () => S.projects.find(p => p.id === S.projId);
-const getEp    = () => { const p=getProj(); return p ? p.episodes.find(e=>e.id===S.epId) : null; };
+const getProj = () => S.projects.find(p => p.id === S.projId);
+const getEp = () => { const p=getProj(); return p ? p.episodes.find(e=>e.id===S.epId) : null; };
 function patchEp(data) {
   const p=getProj(); if(!p) return;
   const i=p.episodes.findIndex(e=>e.id===S.epId);
@@ -189,10 +175,21 @@ function patchEp(data) {
 // TEXT UTILS
 // ═══════════════════════════════════════
 function toSegments(script) {
-  return script.split(/\n\n+/).map(p=>p.trim()).filter(p=>p.length>10).slice(0,6);
+  // Divise en paragraphes, minimum 4, maximum 6
+  let segs = script.split(/\n\n+/).map(p=>p.trim()).filter(p=>p.length>10);
+  if(segs.length < 4) {
+    // Si moins de 4, on coupe les longs paragraphes en 2
+    segs = [];
+    const sentences = script.split(/(?<=[.!?])\s+/).filter(s=>s.trim().length>10);
+    const perSeg = Math.max(2, Math.ceil(sentences.length / 4));
+    for(let i=0; i<sentences.length; i+=perSeg) {
+      segs.push(sentences.slice(i, i+perSeg).join(' '));
+    }
+  }
+  return segs.slice(0, 6);
 }
 function cleanForTTS(text) {
-  return text.replace(/\[.*?\]/g,' ').replace(/\*+/g,'').replace(/#{1,6}\s/g,'').replace(/\s{2,}/g,' ').trim();
+  return text.replace(/\[.*?\]/g,' ').replace(/\*+/g,'').replace(/#/g,'').replace(/\s{2,}/g,' ').trim();
 }
 function chunkText(text, max) {
   const out=[]; let cur=text.trim();
@@ -205,16 +202,9 @@ function chunkText(text, max) {
 }
 
 // ═══════════════════════════════════════
-// GEMINI — CASCADE FALLBACK
-// Essaie 3 modèles en ordre de qualité.
-// Si 503 (surchargé) ou 429 (quota) → modèle suivant.
-// gemini-1.5-flash-8b est très léger, jamais surchargé.
+// GEMINI — Cascade de modèles
 // ═══════════════════════════════════════
-const GEMINI_MODELS = [
-  'gemini-2.5-flash',
-  'gemini-1.5-flash',
-  'gemini-1.5-flash-8b',
-];
+const GEMINI_MODELS = ['gemini-2.5-flash','gemini-1.5-flash','gemini-1.5-flash-8b'];
 
 async function geminiCall(model, prompt, key) {
   const ctrl = new AbortController();
@@ -235,45 +225,32 @@ async function geminiCall(model, prompt, key) {
     clearTimeout(timer);
     const data = await r.json();
     if (!r.ok) {
-      const msg = data.error?.message || 'erreur';
       const code = r.status;
-      // 503 = surcharge, 429 = quota, 500 = erreur interne → essaie suivant
-      if (code === 503 || code === 429 || code === 500) {
-        throw new Error('RETRY:' + code + ':' + msg);
-      }
-      throw new Error('Gemini ' + code + ': ' + msg);
+      if (code === 503 || code === 429 || code === 500) throw new Error('RETRY');
+      throw new Error(data.error?.message || 'Erreur Gemini');
     }
     return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
   } catch(e) {
     clearTimeout(timer);
-    if (e.name === 'AbortError') throw new Error('RETRY:timeout');
+    if (e.name === 'AbortError') throw new Error('RETRY');
     throw e;
   }
 }
 
 async function gemini(prompt) {
   const key = getKey();
-  if (!key) throw new Error('Clé Gemini manquante — enregistre-la en haut');
-
-  let lastErr = null;
+  if (!key) throw new Error('Clé Gemini manquante');
   for (const model of GEMINI_MODELS) {
     try {
-      console.log(`[Gemini] Essai modèle: ${model}`);
+      console.log(`[Gemini] Essai: ${model}`);
       const result = await geminiCall(model, prompt, key);
-      console.log(`[Gemini] ✅ Succès avec ${model}`);
+      console.log(`[Gemini] ✅ ${model}`);
       return result;
     } catch(e) {
-      lastErr = e;
-      if (e.message.startsWith('RETRY:')) {
-        console.warn(`[Gemini] ⚠️ ${model} indisponible (${e.message}) → modèle suivant`);
-        await sleep(1500); // petit délai avant de réessayer
-        continue;
-      }
-      // Erreur non-récupérable (clé invalide, etc.) → on arrête
+      if (e.message === 'RETRY') { console.warn(`[Gemini] ⚠️ ${model} indisponible → suivant`); await sleep(1000); continue; }
       throw e;
     }
   }
-  // Tous les modèles ont échoué
   throw new Error('Tous les modèles Gemini sont surchargés. Réessaie dans 1 minute.');
 }
 
@@ -302,28 +279,35 @@ Style: ${ton==='Mystérieux'?'dark horror african cinematic':'warm african folk 
 Character: ${cd}
 Scenes:
 ${segs.map((s,i)=>`${i+1}. ${s.slice(0,120)}`).join('\n')}
-Return ONLY the JSON array, no markdown.`);
+Return ONLY the JSON array, no markdown. Example: ["keyword1, keyword2...", "keyword1, keyword2..."]`);
     const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
-    if(Array.isArray(parsed)) return parsed;
+    if(Array.isArray(parsed) && parsed.length>0) return parsed;
   } catch(e){}
   return segs.map(()=>'mysterious african night, cinematic shadows, moonlight');
 }
 
 // ═══════════════════════════════════════
-// ✅ IMAGE ENGINE — COMPLETELY REWRITTEN
-// Strategy: pure <img> tag loading with
-// canvas pixel-check to detect black images
-// + multiple provider fallback
+// NOUVEAU MOTEUR D'IMAGES — 3 fournisseurs
 // ═══════════════════════════════════════
 
-// Build Pollinations URL — NO enhance, short prompt, model=flux
-function pollinationsUrl(prompt, seed) {
-  const p = prompt.slice(0, 120); // keep prompt short
-  return `https://image.pollinations.ai/prompt/${encodeURIComponent(p)}?width=576&height=1024&seed=${seed}&nologo=true&model=flux`;
+// Fournisseur 1: Pollinations (rapide, parfois noir)
+function buildPollinationsUrl(prompt, seed) {
+  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt.slice(0,150))}?width=576&height=1024&seed=${seed}&nologo=true`;
 }
 
-// Check if an img element is truly rendered (not black)
-// by sampling a few canvas pixels
+// Fournisseur 2: Picsum + text (fallback créatif)
+function buildPicsumUrl(seed) {
+  return `https://picsum.photos/seed/${seed}/576/1024`;
+}
+
+// Fournisseur 3: Placeholder avec texte (dernier recours)
+function buildPlaceholderUrl(text, seed) {
+  const colors = ['1a0a00','0a1a00','000a1a','1a001a','001a1a'];
+  const bg = colors[seed % colors.length];
+  return `https://placehold.co/576x1024/${bg}/C4923A?text=${encodeURIComponent(text.slice(0,30))}`;
+}
+
+// Vérifie si une image est vraiment chargée (pas noire)
 function isImageReal(imgEl) {
   try {
     const cv = document.createElement('canvas');
@@ -333,121 +317,91 @@ function isImageReal(imgEl) {
     const d = ctx.getImageData(0, 0, 20, 20).data;
     let sum = 0;
     for(let i=0; i<d.length; i+=4) sum += d[i]+d[i+1]+d[i+2];
-    // If all pixels are near-black, sum will be very low
-    return sum > 500; // at least some non-black pixels
-  } catch(e) {
-    // CORS block on canvas = image came from external origin
-    // If we can't read pixels, assume image is real (it loaded)
-    return true;
-  }
+    return sum > 500;
+  } catch(e) { return true; }
 }
 
-// Load one image via <img> tag with timeout and pixel check
-function loadImgTag(url, timeoutMs = 45000) {
+// Charge une image avec timeout + vérification pixels
+function loadImage(url, timeoutMs=20000) {
   return new Promise(resolve => {
     const img = new Image();
     img.crossOrigin = 'anonymous';
     let done = false;
-
     const finish = (result) => {
       if(done) return;
       done = true;
       clearTimeout(timer);
-      img.onload = img.onerror = null;
       resolve(result);
     };
-
     const timer = setTimeout(() => finish(null), timeoutMs);
-
     img.onload = () => {
-      // Small delay to let image fully decode
       setTimeout(() => {
-        if(img.naturalWidth < 10 || img.naturalHeight < 10) {
-          finish(null); return;
-        }
-        // Pixel check — detect black images
-        const real = isImageReal(img);
-        finish(real ? img.src : null);
-      }, 200);
+        if(img.naturalWidth < 10) { finish(null); return; }
+        finish(isImageReal(img) ? img.src : null);
+      }, 300);
     };
-
     img.onerror = () => finish(null);
     img.src = url;
   });
 }
 
-// ✅ Main image generation for one slot
-// Tries multiple seeds, waits properly between attempts
-async function generateSlotImage(prompt, slotIdx, projSeed, maxAttempts = 6) {
-  // Seeds: project-based first, then random
+// Génère UNE image avec multiples tentatives et fournisseurs
+async function generateOneImage(prompt, idx, baseSeed) {
   const seeds = [
-    projSeed + slotIdx * 137,
-    projSeed + slotIdx * 251 + 1000,
+    baseSeed + idx * 137,
+    baseSeed + idx * 251 + 1000,
     Math.floor(Math.random()*900000)+100000,
     Math.floor(Math.random()*900000)+100000,
-    Math.floor(Math.random()*900000)+100000,
-    Math.floor(Math.random()*900000)+100000,
-  ].slice(0, maxAttempts);
+  ];
 
-  for(let a = 0; a < seeds.length; a++) {
-    const seed = seeds[a];
-
-    // Update slot UI
-    updateSlotLoading(slotIdx, `${a+1}/${seeds.length}`);
-
-    // ✅ KEY: wait BEFORE fetching, give Pollinations time to generate
-    // First attempt: 4s, subsequent: 7s
-    await sleep(a === 0 ? 4000 : 7000);
-
-    const url = pollinationsUrl(prompt, seed);
-    console.log(`[img ${slotIdx+1}] attempt ${a+1} seed=${seed}`);
-
-    const result = await loadImgTag(url, 40000);
-
+  // Essaye Pollinations avec plusieurs seeds
+  for(let a=0; a<seeds.length; a++) {
+    const url = buildPollinationsUrl(prompt, seeds[a]);
+    const result = await loadImage(url, 15000);
     if(result) {
-      console.log(`[img ${slotIdx+1}] ✅ OK attempt ${a+1}`);
+      console.log(`[Img ${idx+1}] ✅ Pollinations seed=${seeds[a]}`);
       return result;
     }
-
-    console.warn(`[img ${slotIdx+1}] ❌ attempt ${a+1} failed`);
+    console.warn(`[Img ${idx+1}] ❌ Pollinations attempt ${a+1}`);
+    await sleep(2000);
   }
 
-  return null;
-}
+  // Fallback Picsum
+  const picsumUrl = buildPicsumUrl(seeds[0]);
+  const picsumResult = await loadImage(picsumUrl, 10000);
+  if(picsumResult) {
+    console.log(`[Img ${idx+1}] ✅ Picsum fallback`);
+    return picsumResult;
+  }
 
-// Update a single slot's loading state without re-rendering
-function updateSlotLoading(idx, attempt) {
-  const slot = $(`slot-${idx}`);
-  if(!slot) return;
-  const badge = slot.querySelector('.attempt-badge');
-  if(badge) badge.textContent = `Tentative ${attempt}`;
+  // Dernier recours: placeholder
+  const placeholderUrl = buildPlaceholderUrl(prompt, seeds[0]);
+  console.log(`[Img ${idx+1}] ⚠️ Placeholder fallback`);
+  return placeholderUrl;
 }
 
 // ═══════════════════════════════════════
-// FULL IMAGE GENERATION FLOW
+// GÉNÉRATION PARALLÈLE DE TOUTES LES IMAGES
 // ═══════════════════════════════════════
 async function doGenerateImages() {
   if(S.studio.busy) return;
   S.studio.busy = true;
   S.studio.error = null;
 
-  // Init segments if needed
+  // Initialiser les segments
   if(S.studio.segments.length === 0) {
     const segs = toSegments(S.studio.script);
     S.studio.segments = segs.map(text=>({text, prompt:'', imgUrl:'', status:'idle'}));
   }
 
-  // Reset all to idle
   S.studio.segments = S.studio.segments.map(s=>({...s, imgUrl:'', status:'idle'}));
-  S.studio.imgProgress = 0;
-  S.studio.imgTotal = S.studio.segments.length;
-  render(); // show the grid
+  render();
 
   const proj = getProj();
   const chars = proj ? proj.characters : [];
   const projSeed = proj?.seed || 42000;
 
-  // Get keywords from Gemini
+  // Obtenir les mots-clés
   let keywords;
   try {
     keywords = await getKeywords(S.studio.segments.map(s=>s.text), chars, S.studio.ton);
@@ -458,21 +412,19 @@ async function doGenerateImages() {
   const mc = chars.find(c=>c.role==='Principal')||chars[0];
   const charDesc = mc ? mc.description.slice(0,60) : 'african person';
 
-  // ✅ SEQUENTIAL — one at a time
+  // Marquer tout comme loading
+  S.studio.segments.forEach((s,i) => s.status = 'loading');
+  render();
+
+  // ✅ GÉNÉRATION SÉQUENTIELLE avec délai suffisant
   for(let i = 0; i < S.studio.segments.length; i++) {
-    S.studio.segments[i].status = 'loading';
-
-    // Render the slot as loading immediately
-    renderSlot(i);
-
-    // Update progress text
-    updateProgressText(i);
-
     const kw = keywords[i] || 'mysterious african night cinematic';
-    const prompt = `${kw}, ${charDesc}, dramatic lighting, realistic photo, 8k`;
-    S.studio.segments[i].prompt = prompt;
+    const prompt = `${kw}, ${charDesc}, dramatic lighting, realistic photo`;
 
-    const url = await generateSlotImage(prompt, i, projSeed);
+    S.studio.segments[i].prompt = prompt;
+    updateSlotDisplay(i);
+
+    const url = await generateOneImage(prompt, i, projSeed);
 
     if(url) {
       S.studio.segments[i].imgUrl = url;
@@ -481,108 +433,77 @@ async function doGenerateImages() {
       S.studio.segments[i].status = 'error';
     }
 
-    S.studio.imgProgress = i + 1;
-    renderSlot(i);
-    updateCounterBar();
+    updateSlotDisplay(i);
+    updateProgress();
 
-    // Short gap between images
-    if(i < S.studio.segments.length - 1) await sleep(1500);
+    // Délai entre chaque image
+    if(i < S.studio.segments.length - 1) await sleep(3000);
   }
 
   S.studio.busy = false;
-  patchEp({ images: S.studio.segments.map(s=>({text:s.text,url:s.imgUrl})) });
-
-  // Final re-render to update button states
+  patchEp({ images: S.studio.segments.map(s=>({text:s.text, url:s.imgUrl})) });
   render();
 }
 
-// Render a single slot without full re-render
-function renderSlot(i) {
+function updateSlotDisplay(i) {
   const slot = $(`slot-${i}`);
   if(!slot) return;
   const seg = S.studio.segments[i];
   slot.className = `img-slot ${seg.status}`;
+
   if(seg.status === 'done' && seg.imgUrl) {
     slot.innerHTML = `
       <img src="${seg.imgUrl}" alt="">
       <div class="img-slot-overlay">
-        <button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺ Régénérer</button>
+        <button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺</button>
         <label class="btn btn-brown btn-sm" style="cursor:pointer">
-          📁 Galerie
-          <input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)">
+          📁 <input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)">
         </label>
       </div>`;
   } else if(seg.status === 'loading') {
-    slot.innerHTML = `
-      <div class="img-slot-body">
-        <div class="spinner"></div>
-        <span class="img-slot-label attempt-badge">Génération...</span>
-      </div>`;
+    slot.innerHTML = `<div class="img-slot-body"><div class="spinner"></div><span class="text-sm text-muted">Génération...</span></div>`;
   } else if(seg.status === 'error') {
-    slot.innerHTML = `
-      <div class="img-slot-body">
-        <span style="font-size:1.5rem">❌</span>
-        <span class="img-slot-label">Échec</span>
-        <button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺ Retry</button>
-        <label class="btn btn-brown btn-sm" style="cursor:pointer;font-size:.75rem">
-          📁 Importer
-          <input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)">
-        </label>
-      </div>`;
+    slot.innerHTML = `<div class="img-slot-body"><span style="font-size:1.5rem">❌</span><button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺</button></div>`;
   } else {
-    slot.innerHTML = `
-      <div class="img-slot-body" style="opacity:.3">
-        <span class="img-slot-num">${i+1}</span>
-        <span class="img-slot-label">En attente</span>
-      </div>`;
+    slot.innerHTML = `<div class="img-slot-body" style="opacity:.3"><span style="font-size:2rem">${i+1}</span></div>`;
   }
 }
 
-function updateCounterBar() {
+function updateProgress() {
   const done = S.studio.segments.filter(s=>s.status==='done').length;
   const total = S.studio.segments.length;
-  const el = $('img-counter');
+  const counter = $('img-counter');
   const bar = $('img-pbar');
-  if(el) el.textContent = `${done}/${total} images prêtes`;
+  if(counter) counter.textContent = `${done}/${total} images prêtes`;
   if(bar) bar.style.width = (done/Math.max(total,1)*100)+'%';
 }
 
-function updateProgressText(i) {
-  const el = $('img-prog-txt');
-  if(el) el.textContent = `⏳ Image ${i+1}/${S.studio.segments.length} en cours...`;
-}
-
-// ═══ REGEN ONE ═══
 window.regenOne = async function(i) {
   if(S.studio.busy) return;
   S.studio.busy = true;
   S.studio.segments[i].status = 'loading';
   S.studio.segments[i].imgUrl = '';
-  renderSlot(i);
+  updateSlotDisplay(i);
 
   const proj = getProj();
-  const projSeed = proj?.seed || 42000;
+  const projSeed = (proj?.seed || 42000) + Math.floor(Math.random()*10000);
   const prompt = S.studio.segments[i].prompt || 'mysterious african night cinematic';
-  const newSeed = Math.floor(Math.random()*900000)+100000;
 
-  await sleep(2000);
-  const url = await generateSlotImage(prompt, i, newSeed, 4);
-
+  const url = await generateOneImage(prompt, i, projSeed);
   S.studio.segments[i].imgUrl = url || '';
   S.studio.segments[i].status = url ? 'done' : 'error';
   S.studio.busy = false;
-  renderSlot(i);
-  updateCounterBar();
+  updateSlotDisplay(i);
+  updateProgress();
 };
 
-// ═══ IMPORT FROM GALLERY ═══
 window.importImg = function(i, input) {
   const file = input.files?.[0];
   if(!file) return;
   const url = URL.createObjectURL(file);
   S.studio.segments[i] = {...S.studio.segments[i], imgUrl:url, status:'done'};
-  renderSlot(i);
-  updateCounterBar();
+  updateSlotDisplay(i);
+  updateProgress();
 };
 
 // ═══════════════════════════════════════
@@ -661,64 +582,156 @@ function silentWav(sr, n) {
 }
 
 // ═══════════════════════════════════════
-// VIDEO
+// VIDÉO — AVEC ZOOM KEN BURNS + AUDIO
 // ═══════════════════════════════════════
 async function generateVideo(imgUrls, audioBlob, onProg) {
-  return new Promise(async(resolve,reject)=>{
-    const W=576,H=1024;
-    const cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+  return new Promise(async(resolve, reject) => {
+    const W=576, H=1024;
+    const cv=document.createElement('canvas');
+    cv.width=W; cv.height=H;
     const ctx=cv.getContext('2d');
 
-    onProg(5,'Chargement images...');
-    const imgs=await Promise.all(imgUrls.map(url=>new Promise(res=>{
+    onProg(5, 'Chargement images...');
+    const imgs = await Promise.all(imgUrls.map(url => new Promise(res => {
       if(!url){res(null);return;}
       const img=new Image(); img.crossOrigin='anonymous';
-      const t=setTimeout(()=>res(null),30000);
+      const t=setTimeout(()=>res(null),20000);
       img.onload=()=>{clearTimeout(t);res(img);};
       img.onerror=()=>{clearTimeout(t);res(null);};
       img.src=url;
     })));
-    const valid=imgs.filter(Boolean);
+
+    const valid = imgs.filter(Boolean);
     if(!valid.length){reject(new Error('Aucune image valide'));return;}
-    onProg(15,`${valid.length} images chargées`);
+    onProg(10, `${valid.length} images chargées`);
 
-    const aUrl=URL.createObjectURL(audioBlob);
-    const aEl=new Audio(aUrl); aEl.preload='auto';
-    await new Promise(r=>{aEl.onloadedmetadata=r;aEl.onerror=r;setTimeout(r,4000);aEl.load();});
-    const dur=(aEl.duration&&isFinite(aEl.duration))?aEl.duration:imgs.length*7;
-    const dpImg=(dur*1000)/Math.max(imgs.length,1);
-    onProg(20,'Démarrage montage...');
+    // ✅ AUDIO — Charger et décoder correctement
+    onProg(15, 'Préparation audio...');
+    const audioUrl = URL.createObjectURL(audioBlob);
 
-    let aTrack=null;
-    try{const ac=new(window.AudioContext||window.webkitAudioContext)();const src=ac.createMediaElementSource(aEl);const dst=ac.createMediaStreamDestination();src.connect(dst);src.connect(ac.destination);aTrack=dst.stream.getAudioTracks()[0];}catch(e){}
+    // Utiliser AudioContext pour capturer l'audio
+    let audioCtx = null;
+    let audioBuffer = null;
+    let audioDuration = imgs.length * 8; // fallback
 
-    const vs=cv.captureStream(30);
-    if(aTrack) vs.addTrack(aTrack);
-    const mime=['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'';
-    const rec=new MediaRecorder(vs,mime?{mimeType:mime,videoBitsPerSecond:2500000}:{});
-    const chunks=[]; rec.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
-    rec.onstop=()=>resolve(new Blob(chunks,{type:mime||'video/webm'}));
-    rec.onerror=reject; rec.start(100);
-
-    const kb=[p=>({sx:1+p*.12,tx:-p*10,ty:-p*10}),p=>({sx:1+p*.12,tx:p*10,ty:-p*5}),p=>({sx:1+p*.1,tx:-p*5,ty:p*10})];
-    ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
-    await aEl.play().catch(()=>{});
-    const t0=performance.now();
-
-    function draw(){
-      const el=performance.now()-t0;
-      const ii=Math.min(Math.floor(el/dpImg),imgs.length-1);
-      const pr=(el%dpImg)/dpImg;
-      const img=imgs[ii]; const k=kb[ii%kb.length](pr);
-      ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
-      if(img){ctx.save();ctx.translate(W/2+k.tx,H/2+k.ty);ctx.scale(k.sx,k.sx);ctx.drawImage(img,-W/2,-H/2,W,H);ctx.restore();}
-      const g=ctx.createLinearGradient(0,H*.7,0,H);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.6)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-      ctx.fillStyle='rgba(255,255,255,.25)';ctx.font='600 13px sans-serif';ctx.textAlign='right';ctx.textBaseline='top';ctx.fillText('Papa Conteur',W-12,12);
-      const tp=Math.min(el/(dur*1000),1);
-      onProg(20+Math.floor(tp*78),`Montage: ${Math.floor(tp*100)}%`);
-      if(el<dur*1000+300) requestAnimationFrame(draw);
-      else{rec.stop();onProg(100,'✅ Vidéo prête !');}
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const arrayBuffer = await audioBlob.arrayBuffer();
+      audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+      audioDuration = audioBuffer.duration;
+      console.log(`[Video] Audio décodé: ${audioDuration.toFixed(1)}s`);
+    } catch(e) {
+      console.warn('[Video] Audio decode failed, using fallback:', e.message);
     }
+
+    const durationPerImage = (audioDuration * 1000) / Math.max(imgs.length, 1);
+    onProg(20, `Démarrage montage (${audioDuration.toFixed(0)}s)...`);
+
+    // ✅ Créer le stream vidéo
+    const videoStream = cv.captureStream(30);
+
+    // ✅ Ajouter l'audio AU stream
+    let audioSource = null;
+    let audioDest = null;
+    if(audioCtx && audioBuffer) {
+      try {
+        audioSource = audioCtx.createBufferSource();
+        audioSource.buffer = audioBuffer;
+        audioDest = audioCtx.createMediaStreamDestination();
+        audioSource.connect(audioDest);
+        // NE PAS connecter à destination (pas d'écho dans les hauts-parleurs)
+        const audioTrack = audioDest.stream.getAudioTracks()[0];
+        if(audioTrack) {
+          videoStream.addTrack(audioTrack);
+          console.log('[Video] ✅ Audio track added to video');
+        }
+      } catch(e) {
+        console.warn('[Video] Audio track failed:', e.message);
+      }
+    }
+
+    // Recorder
+    const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')
+      ? 'video/webm;codecs=vp9,opus'
+      : MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')
+        ? 'video/webm;codecs=vp8,opus'
+        : 'video/webm';
+
+    const recorder = new MediaRecorder(videoStream, { mimeType: mime, videoBitsPerSecond: 2500000 });
+    const chunks = [];
+    recorder.ondataavailable = e => { if(e.data.size>0) chunks.push(e.data); };
+    recorder.onstop = () => {
+      const blob = new Blob(chunks, { type: mime });
+      console.log(`[Video] ✅ Final size: ${(blob.size/1024/1024).toFixed(1)}MB`);
+      resolve(blob);
+    };
+    recorder.onerror = reject;
+
+    // ✅ Démarrer le recorder ET l'audio en même temps
+    recorder.start(100);
+    if(audioSource) {
+      audioSource.start(0);
+      console.log('[Video] ▶️ Audio started');
+    }
+
+    const startTime = performance.now();
+
+    // ✅ 3 animations Ken Burns différentes
+    const kenBurns = [
+      // Animation 1: zoom + déplacement diagonal
+      p => ({ sx: 1 + p * 0.15, tx: -p * 8, ty: -p * 10 }),
+      // Animation 2: zoom + déplacement inverse
+      p => ({ sx: 1 + p * 0.15, tx: p * 8, ty: -p * 5 }),
+      // Animation 3: zoom + mouvement vertical
+      p => ({ sx: 1 + p * 0.12, tx: -p * 4, ty: p * 8 }),
+    ];
+
+    function draw() {
+      const elapsed = performance.now() - startTime;
+      const imgIdx = Math.min(Math.floor(elapsed / durationPerImage), imgs.length - 1);
+      const progress = Math.min((elapsed % durationPerImage) / durationPerImage, 1);
+      const img = imgs[imgIdx];
+      const kb = kenBurns[imgIdx % kenBurns.length](progress);
+
+      // Fond noir
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, W, H);
+
+      // Image avec Ken Burns
+      if(img) {
+        ctx.save();
+        ctx.translate(W/2 + kb.tx, H/2 + kb.ty);
+        ctx.scale(kb.sx, kb.sx);
+        ctx.drawImage(img, -W/2, -H/2, W, H);
+        ctx.restore();
+      }
+
+      // Dégradé sous-titres
+      const gradient = ctx.createLinearGradient(0, H*0.65, 0, H);
+      gradient.addColorStop(0, 'rgba(0,0,0,0)');
+      gradient.addColorStop(1, 'rgba(0,0,0,0.7)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, W, H);
+
+      // Watermark
+      ctx.fillStyle = 'rgba(255,255,255,0.25)';
+      ctx.font = '600 14px Barlow, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'top';
+      ctx.fillText('Papa Conteur', W-12, 12);
+
+      // Progression
+      const totalProgress = Math.min(elapsed / (audioDuration * 1000), 1);
+      onProg(20 + Math.floor(totalProgress * 78), `Montage: ${Math.floor(totalProgress*100)}%`);
+
+      if(elapsed < audioDuration * 1000 + 500) {
+        requestAnimationFrame(draw);
+      } else {
+        recorder.stop();
+        onProg(100, '✅ Vidéo prête !');
+      }
+    }
+
     requestAnimationFrame(draw);
   });
 }
@@ -737,7 +750,6 @@ function buildView() {
   }
 }
 
-// ─── HOME ───
 function vHome() {
   const key=getKey();
   return `
@@ -747,33 +759,31 @@ function vHome() {
     <p class="text-muted">Studio TikTok — Histoires africaines</p>
   </div>
   <div class="projects-grid">
-    <div class="card" style="border-color:rgba(196,146,58,.35)">
+    <div class="card" style="border-color:rgba(196,146,58,.35);margin-bottom:1rem">
       <div class="flex items-center justify-between mb-2">
-        <span class="font-bold" style="font-size:.9rem">🔑 Clé API Gemini</span>
-        ${key?'<span style="color:#80cc80;font-size:.8rem">✅ Enregistrée</span>':'<span style="color:#ff8080;font-size:.8rem">⚠️ Manquante</span>'}
+        <span class="font-bold">🔑 Clé API Gemini</span>
+        ${key?'<span style="color:#80cc80;font-size:.8rem">✅ OK</span>':'<span style="color:#ff8080;font-size:.8rem">⚠️</span>'}
       </div>
       <div class="flex gap-1">
         <input id="gkey" class="input" type="text" placeholder="AIza..." value="${key}" style="flex:1;font-family:monospace;font-size:.85rem">
-        <button class="btn btn-gold" id="btn-save-key" style="white-space:nowrap">💾 Sauver</button>
+        <button class="btn btn-gold" id="btn-save-key">💾</button>
       </div>
-      <p style="font-size:.72rem;color:var(--text3);margin-top:.4rem">Gratuit sur <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--gold)">aistudio.google.com</a></p>
     </div>
-    <button class="btn btn-primary btn-full" id="btn-new-proj">✦ Nouvelle série</button>
-    ${S.projects.length===0?`<div class="card text-center"><p class="text-muted">Aucune série. Commence par en créer une.</p></div>`
-      :S.projects.map(p=>`
-      <div class="project-card">
-        <div class="project-card-name">${p.name}</div>
-        <div class="project-card-meta">
-          <span class="tag tag-gold">👤 ${p.characters.length} perso</span>
-          <span class="tag tag-primary">🎬 ${p.episodes.length} ép.</span>
-        </div>
-        <div class="project-card-actions">
-          <button class="btn btn-gold btn-sm" data-open="${p.id}">Ouvrir</button>
-          <button class="btn btn-danger btn-sm" data-del="${p.id}">Supprimer</button>
-        </div>
-      </div>`).join('')}
+    <button class="btn btn-primary btn-full mb-2" id="btn-new-proj">✦ Nouvelle série</button>
+    ${S.projects.length===0?'<p class="text-center text-muted">Aucune série</p>':S.projects.map(p=>`
+    <div class="project-card">
+      <div class="project-card-name">${p.name}</div>
+      <div class="project-card-meta">
+        <span class="tag tag-gold">👤 ${p.characters.length}</span>
+        <span class="tag tag-primary">🎬 ${p.episodes.length}</span>
+      </div>
+      <div class="project-card-actions">
+        <button class="btn btn-gold btn-sm" data-open="${p.id}">Ouvrir</button>
+        <button class="btn btn-danger btn-sm" data-del="${p.id}">✕</button>
+      </div>
+    </div>`).join('')}
   </div>
-  <div class="modal-overlay hidden" id="modal-proj" style="z-index:200">
+  <div class="modal-overlay hidden" id="modal-proj">
     <div class="modal">
       <div class="modal-header"><h3>Nouvelle série</h3><button class="modal-close" id="close-proj">✕</button></div>
       <div class="field-group"><label class="label">Nom</label><input class="input" id="proj-name" placeholder="La Forêt de Minuit"></div>
@@ -782,7 +792,6 @@ function vHome() {
   </div>`;
 }
 
-// ─── PROJECT ───
 function vProject() {
   const p=getProj(); if(!p){S.view='home';return vHome();}
   return `
@@ -790,172 +799,126 @@ function vProject() {
     <button class="header-back" id="btn-home">←</button>
     <div class="header-title">${p.name}<div class="header-sub">Seed: ${p.seed}</div></div>
   </div>
-  <div style="padding:1.5rem;display:flex;flex-direction:column;gap:1.5rem">
-    <div>
-      <div class="flex items-center justify-between mb-2">
-        <h3 style="font-size:1rem;color:var(--gold)">👤 Personnages</h3>
-        <button class="btn btn-brown btn-sm" id="btn-add-char">+ Ajouter</button>
-      </div>
-      ${p.characters.length===0?'<p class="text-muted text-sm">Aucun personnage.</p>':p.characters.map(c=>`
-      <div class="char-card">
-        <div class="char-avatar">${c.name[0]}</div>
-        <div class="char-info">
-          <div class="char-name">${c.name} <span class="tag tag-${c.role==='Principal'?'primary':'gold'}" style="font-size:.65rem">${c.role}</span></div>
-          <div class="char-desc">${c.description}</div>
-        </div>
-        <button class="char-btn del" data-del-char="${c.id}">🗑</button>
-      </div>`).join('')}
+  <div style="padding:1.5rem">
+    <div class="flex items-center justify-between mb-2">
+      <h3 style="color:var(--gold)">👤 Personnages</h3>
+      <button class="btn btn-brown btn-sm" id="btn-add-char">+</button>
     </div>
+    ${p.characters.map(c=>`
+    <div class="char-card">
+      <div class="char-avatar">${c.name[0]}</div>
+      <div class="char-info">
+        <div class="char-name">${c.name} <span class="tag tag-${c.role==='Principal'?'primary':'gold'}" style="font-size:.65rem">${c.role}</span></div>
+        <div class="char-desc">${c.description}</div>
+      </div>
+      <button class="char-btn del" data-del-char="${c.id}">🗑</button>
+    </div>`).join('')}
     <div class="sep"></div>
-    <div>
-      <div class="flex items-center justify-between mb-2">
-        <h3 style="font-size:1rem;color:var(--gold)">🎬 Épisodes</h3>
-        <button class="btn btn-primary btn-sm" id="btn-new-ep">+ Créer</button>
-      </div>
-      ${p.episodes.length===0?'<p class="text-muted text-sm">Aucun épisode.</p>':p.episodes.map((e,i)=>`
-      <div class="ep-card" data-open-ep="${e.id}">
-        <div class="ep-num">${i+1}</div>
-        <div class="ep-info">
-          <div class="ep-title">${e.title||`Épisode ${i+1}`}</div>
-          <div class="ep-status">${e.videoUrl?'✅ Vidéo':e.audioUrl?'🎙 Audio':'✏️ Brouillon'}</div>
-        </div>
-        <span style="color:var(--text3)">›</span>
-      </div>`).join('')}
+    <div class="flex items-center justify-between mb-2">
+      <h3 style="color:var(--gold)">🎬 Épisodes</h3>
+      <button class="btn btn-primary btn-sm" id="btn-new-ep">+</button>
     </div>
+    ${p.episodes.map((e,i)=>`
+    <div class="ep-card" data-open-ep="${e.id}">
+      <div class="ep-num">${i+1}</div>
+      <div class="ep-info">
+        <div class="ep-title">${e.title||`Épisode ${i+1}`}</div>
+        <div class="ep-status">${e.videoUrl?'✅ Vidéo':e.audioUrl?'🎙 Audio':'✏️ Brouillon'}</div>
+      </div>
+    </div>`).join('')}
   </div>
-  <div class="modal-overlay hidden" id="modal-char" style="z-index:200">
+  <div class="modal-overlay hidden" id="modal-char">
     <div class="modal">
-      <div class="modal-header"><h3>Nouveau personnage</h3><button class="modal-close" id="close-char">✕</button></div>
+      <div class="modal-header"><h3>Personnage</h3><button class="modal-close" id="close-char">✕</button></div>
       <div class="field-group"><label class="label">Nom</label><input class="input" id="char-name" placeholder="Kofi"></div>
       <div class="field-group"><label class="label">Rôle</label>
         <select class="select" id="char-role"><option value="Principal">Principal</option><option value="Secondaire">Secondaire</option></select>
       </div>
-      <div class="field-group"><label class="label">Description (anglais pour les images)</label>
-        <textarea class="textarea" id="char-desc" placeholder="young african man, dark skin, short hair, white shirt" style="min-height:90px"></textarea>
+      <div class="field-group"><label class="label">Description (anglais)</label>
+        <textarea class="textarea" id="char-desc" placeholder="young african man, dark skin..." style="min-height:80px"></textarea>
       </div>
       <button class="btn btn-primary btn-full mt-2" id="confirm-char">Ajouter</button>
     </div>
   </div>`;
 }
 
-// ─── STUDIO ───
 function vStudio() {
   const st=S.studio, ep=getEp(), proj=getProj();
   const steps=[{n:1,l:'Script'},{n:2,l:'Voix'},{n:3,l:'Images'},{n:4,l:'Vidéo'}];
-  const stepsHtml=`<div class="steps">${steps.map((s,i)=>`
-    <div class="step-item">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
-        <div class="step-circle ${st.step>s.n?'done':st.step===s.n?'active':'pending'}">${st.step>s.n?'✓':s.n}</div>
-        <span class="step-label">${s.l}</span>
-      </div>
-      ${i<3?`<div class="step-line ${st.step>s.n?'done':''}" style="margin-bottom:1.2rem"></div>`:''}
-    </div>`).join('')}</div>`;
 
   let content='';
 
   if(st.step===1) content=`
-    <div class="field-group"><label class="label">Titre</label><input class="input" id="ep-title" value="${st.title}" placeholder="La nuit du carrefour"></div>
+    <div class="field-group"><label class="label">Titre</label><input class="input" id="ep-title" value="${st.title}" placeholder="Titre de l'épisode"></div>
     <div class="field-group"><label class="label">Ton</label>
       <div class="ton-selector">
         <button class="ton-btn ${st.ton==='Mystérieux'?'active':''}" data-ton="Mystérieux">🌑 Mystérieux</button>
         <button class="ton-btn ${st.ton==='Papa Conteur'?'active':''}" data-ton="Papa Conteur">🔥 Papa Conteur</button>
       </div>
     </div>
-    <div class="field-group"><label class="label">Script</label><textarea class="textarea" id="ep-script" style="min-height:200px" placeholder="Écris ton histoire ici...">${st.script}</textarea></div>
-    ${st.error?`<div class="alert alert-error"><span>⚠</span><span>${st.error}</span></div>`:''}
-    <button class="btn btn-gold btn-full mb-2" id="btn-enrich" ${st.busy?'disabled':''}>
-      ${st.busy?'<div class="spinner"></div> Enrichissement...':'✨ Enrichir avec l\'IA'}
-    </button>
-    <button class="btn btn-primary btn-full" id="btn-s1-next" ${st.script.trim()?'':'disabled'}>✅ Script prêt → Voix</button>`;
+    <div class="field-group"><label class="label">Script</label><textarea class="textarea" id="ep-script" style="min-height:180px" placeholder="Écris ton histoire...">${st.script}</textarea></div>
+    ${st.error?`<div class="alert alert-error">${st.error}</div>`:''}
+    <button class="btn btn-gold btn-full mb-2" id="btn-enrich" ${st.busy?'disabled':''}>${st.busy?'<div class="spinner"></div>':'✨ Enrichir avec IA'}</button>
+    <button class="btn btn-primary btn-full" id="btn-s1-next" ${st.script.trim()?'':'disabled'}>✅ Script → Voix</button>`;
 
   else if(st.step===2) content=`
-    <div class="card text-center mb-3">
-      <div style="font-size:2rem;margin-bottom:.5rem">🎙</div>
-      <h3 style="margin-bottom:.3rem">Génération de la Voix</h3>
-      <p class="text-muted text-sm">Voix française posée et mystérieuse</p>
-    </div>
-    ${st.error?`<div class="alert alert-error"><span>⚠</span><span>${st.error}</span></div>`:''}
+    <div class="card text-center mb-3"><div style="font-size:2rem">🎙</div><h3>Voix Off</h3></div>
+    ${st.error?`<div class="alert alert-error">${st.error}</div>`:''}
     ${st.audioUrl?`
       <div class="audio-player">
-        <div class="flex items-center gap-1"><span style="color:var(--gold)">✅</span><span class="font-bold">Audio prêt</span>${st.audioDuration?`<span class="text-muted text-sm">${Math.round(st.audioDuration)}s</span>`:''}</div>
+        <div class="flex items-center gap-1 mb-1"><span style="color:var(--gold)">✅</span><span class="font-bold">Prêt</span></div>
         <audio controls src="${st.audioUrl}" id="audio-el"></audio>
-        <button class="btn btn-ghost btn-sm" id="btn-regen-audio">↺ Regénérer</button>
+        <button class="btn btn-ghost btn-sm" id="btn-regen-audio">↺</button>
       </div>`:`
-      <button class="btn btn-primary btn-full mb-3" id="btn-gen-audio" ${st.busy?'disabled':''}>
-        ${st.busy?'<div class="spinner"></div> Génération...':'🎙 Générer la voix'}
-      </button>`}
+      <button class="btn btn-primary btn-full mb-3" id="btn-gen-audio" ${st.busy?'disabled':''}>${st.busy?'<div class="spinner"></div>':'🎙 Générer voix'}</button>`}
     <div class="flex gap-2">
-      <button class="btn btn-ghost flex-1" id="btn-s2-back">← Retour</button>
+      <button class="btn btn-ghost flex-1" id="btn-s2-back">←</button>
       <button class="btn btn-primary flex-1" id="btn-s2-next" ${st.audioUrl?'':'disabled'}>✅ Voix → Images</button>
     </div>`;
 
   else if(st.step===3) {
-    const done=st.segments.filter(s=>s.status==='done').length;
-    const total=st.segments.length||toSegments(st.script).length;
+    const done=S.studio.segments.filter(s=>s.status==='done').length;
+    const total=S.studio.segments.length||4;
     content=`
-    <div class="alert alert-info">
-      <span>ℹ️</span>
-      <div style="font-size:.82rem;line-height:1.5">
-        <strong>Génération séquentielle</strong> — chaque image est vérifiée avant la suivante.
-        Comptez ~5–10s par image. Tu peux aussi importer depuis ta galerie 📁
-      </div>
+    <div class="alert alert-info"><span>ℹ️</span><span style="font-size:.82rem">Génération séquentielle (~5-8s par image). 3 fournisseurs en cascade.</span></div>
+    <div class="flex items-center justify-between mb-2">
+      <span id="img-counter" style="color:var(--text2)">${done}/${total} prêtes</span>
+      <button class="btn btn-primary btn-sm" id="btn-gen-imgs" ${st.busy?'disabled':''}>${st.busy?'<div class="spinner"></div>':'⚡ Générer'}</button>
     </div>
-    <div class="img-counter-bar">
-      <span id="img-counter" style="font-size:.9rem;color:var(--text2)">${done}/${total} images prêtes</span>
-      <button class="btn btn-primary btn-sm" id="btn-gen-imgs" ${st.busy?'disabled':''}>
-        ${st.busy?'<div class="spinner"></div>':'⚡'} ${st.busy?'En cours...':'Tout générer'}
-      </button>
+    ${st.busy?`<div class="progress-bar mb-2"><div class="progress-fill" id="img-pbar" style="width:${done/Math.max(total,1)*100}%"></div></div>`:''}
+    <div class="images-grid">
+      ${Array.from({length:total}).map((_,i)=>{
+        const seg=S.studio.segments[i];
+        return `<div class="img-slot ${seg?.status||'idle'}" id="slot-${i}">
+          ${seg?.status==='done'?`<img src="${seg.imgUrl}" alt=""><div class="img-slot-overlay"><button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺</button></div>`
+          :seg?.status==='loading'?`<div class="img-slot-body"><div class="spinner"></div></div>`
+          :`<div class="img-slot-body" style="opacity:.3"><span style="font-size:2rem">${i+1}</span></div>`}
+        </div>`;
+      }).join('')}
     </div>
-    ${st.busy?`
-      <div class="progress-bar mb-1"><div class="progress-fill" id="img-pbar" style="width:${done/Math.max(total,1)*100}%"></div></div>
-      <p class="text-center text-sm text-muted mb-2" id="img-prog-txt">Initialisation...</p>`:''}
-    <div class="images-grid" id="imgs-grid">
-      ${(st.segments.length>0?st.segments:Array(total).fill(null)).map((seg,i)=>
-        seg?`<div class="img-slot ${seg.status}" id="slot-${i}">
-          ${seg.status==='done'&&seg.imgUrl?`
-            <img src="${seg.imgUrl}" alt="">
-            <div class="img-slot-overlay">
-              <button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺ Régénérer</button>
-              <label class="btn btn-brown btn-sm" style="cursor:pointer">📁 Galerie<input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)"></label>
-            </div>`
-          :seg.status==='loading'?`<div class="img-slot-body"><div class="spinner"></div><span class="img-slot-label attempt-badge">Génération...</span></div>`
-          :seg.status==='error'?`<div class="img-slot-body"><span style="font-size:1.5rem">❌</span><span class="img-slot-label">Échec</span><button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺ Retry</button><label class="btn btn-brown btn-sm" style="cursor:pointer;font-size:.75rem">📁 Importer<input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)"></label></div>`
-          :`<div class="img-slot-body" style="opacity:.3"><span class="img-slot-num">${i+1}</span><span class="img-slot-label">En attente</span></div>`}
-        </div>`
-        :`<div class="img-slot idle" id="slot-${i}"><div class="img-slot-body" style="opacity:.3"><span class="img-slot-num">${i+1}</span><span class="img-slot-label">En attente</span></div></div>`
-      ).join('')}
-    </div>
-    <div class="flex gap-2 mt-3">
-      <button class="btn btn-ghost flex-1" id="btn-s3-back">← Retour</button>
+    <div class="flex gap-2">
+      <button class="btn btn-ghost flex-1" id="btn-s3-back">←</button>
       <button class="btn btn-primary flex-1" id="btn-s3-next" ${done>0?'':'disabled'}>✅ Images → Montage</button>
     </div>`;
   }
 
   else if(st.step===4) {
-    const readyUrls=st.segments.filter(s=>s.status==='done'&&s.imgUrl).map(s=>s.imgUrl);
+    const readyUrls=S.studio.segments.filter(s=>s.status==='done'&&s.imgUrl).map(s=>s.imgUrl);
     content=`
-    ${st.error?`<div class="alert alert-error"><span>⚠</span><span>${st.error}</span></div>`:''}
+    ${st.error?`<div class="alert alert-error">${st.error}</div>`:''}
     <div class="card mb-3">
-      <h3 style="margin-bottom:1rem;color:var(--gold)">🎬 Montage Final</h3>
-      <div class="flex gap-1 mb-2 text-sm text-muted">
-        <span>📸 ${readyUrls.length} images</span><span>•</span>
-        <span>🎙 ${st.audioDuration?Math.round(st.audioDuration)+'s':'Audio OK'}</span>
-      </div>
+      <h3 style="color:var(--gold);margin-bottom:1rem">🎬 Montage Final</h3>
+      <div class="flex gap-1 mb-2 text-sm text-muted"><span>📸 ${readyUrls.length} images</span><span>•</span><span>🎙 ${st.audioDuration?Math.round(st.audioDuration)+'s':'Audio OK'}</span></div>
       ${st.videoUrl?`
-        <div class="alert alert-success"><span>✅</span><span>Vidéo prête !</span></div>
+        <div class="alert alert-success mb-2">✅ Vidéo prête !</div>
         <video src="${st.videoUrl}" controls style="width:100%;border-radius:var(--radius);margin-bottom:1rem;max-height:50vh"></video>
         <a href="${st.videoUrl}" download="papa_conteur.webm" class="btn btn-primary btn-full mb-2">⬇️ Télécharger</a>
-        <button class="btn btn-ghost btn-full" id="btn-regen-vid">↺ Regénérer vidéo</button>`:`
-        ${st.busy?`<div class="progress-bar mb-2"><div class="progress-fill" id="vid-bar" style="width:0%"></div></div>
-        <p class="text-center text-sm text-muted mb-2" id="vid-txt">...</p>`:''}
-        <button class="btn btn-primary btn-full mb-2" id="btn-gen-vid" ${st.busy?'disabled':''}>
-          ${st.busy?'<div class="spinner"></div> Montage...':'🎬 Créer la vidéo'}
-        </button>`}
-      <div class="sep"></div>
-      <button class="btn btn-brown btn-full" id="btn-zip">📦 Exporter ZIP (images + audio)</button>
+        <button class="btn btn-ghost btn-full" id="btn-regen-vid">↺</button>`:`
+        ${st.busy?`<div class="progress-bar mb-2"><div class="progress-fill" id="vid-bar" style="width:0%"></div></div><p class="text-sm text-muted mb-2" id="vid-txt">...</p>`:''}
+        <button class="btn btn-primary btn-full mb-2" id="btn-gen-vid" ${st.busy?'disabled':''}>${st.busy?'<div class="spinner"></div>':'🎬 Créer vidéo'}</button>`}
     </div>
     <div class="flex gap-2">
-      <button class="btn btn-ghost flex-1" id="btn-s4-back">← Retour</button>
+      <button class="btn btn-ghost flex-1" id="btn-s4-back">←</button>
       <button class="btn btn-gold flex-1" id="btn-new-ep-2">🔄 Nouvel épisode</button>
     </div>`;
   }
@@ -965,7 +928,17 @@ function vStudio() {
     <button class="header-back" id="btn-back-proj">←</button>
     <div class="header-title">${ep?.title||'Nouvel épisode'}<div class="header-sub">${proj?.name||''}</div></div>
   </div>
-  <div class="studio-content">${stepsHtml}${content}</div>`;
+  <div class="studio-content">
+    <div class="steps">${steps.map((s,i)=>`
+      <div class="step-item">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div class="step-circle ${st.step>s.n?'done':st.step===s.n?'active':'pending'}">${st.step>s.n?'✓':s.n}</div>
+          <span class="step-label">${s.l}</span>
+        </div>
+        ${i<3?`<div class="step-line ${st.step>s.n?'done':''}"></div>`:''}
+      </div>`).join('')}</div>
+    ${content}
+  </div>`;
 }
 
 // ═══════════════════════════════════════
@@ -976,160 +949,97 @@ const show = id=>{ const e=$(id); if(e) e.classList.remove('hidden'); };
 const hide = id=>{ const e=$(id); if(e) e.classList.add('hidden'); };
 
 function attachEvents() {
-  // HOME
   on('btn-save-key','click',()=>{
     const k=$('gkey')?.value?.trim();
-    if(!k?.startsWith('AIza')){alert('La clé doit commencer par AIza...');return;}
-    localStorage.setItem('pc_gemini_key',k);
-    alert('✅ Clé sauvegardée !'); render();
+    if(!k?.startsWith('AIza')){alert('Clé invalide');return;}
+    localStorage.setItem('pc_v5_key',k);alert('✅ Sauvegardé!');render();
   });
   on('btn-new-proj','click',()=>show('modal-proj'));
   on('close-proj','click',()=>hide('modal-proj'));
-  on('confirm-proj','click',createProj);
-  document.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();openProj(el.dataset.open);}));
-  document.querySelectorAll('[data-del]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();delProj(el.dataset.del);}));
-
-  // PROJECT
-  on('btn-home','click',()=>{ S.view='home'; render(); });
+  on('confirm-proj','click',()=>{
+    const n=$('proj-name')?.value?.trim();
+    if(!n){alert('Nom requis');return;}
+    S.projects.unshift({id:uid(),name:n,characters:[],episodes:[],seed:Math.floor(10000+Math.random()*90000)});
+    saveState();hide('modal-proj');render();
+  });
+  document.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click',()=>{S.projId=el.dataset.open;S.view='project';render();}));
+  document.querySelectorAll('[data-del]').forEach(el=>el.addEventListener('click',()=>{
+    if(confirm('Supprimer?')){S.projects=S.projects.filter(p=>p.id!==el.dataset.del);saveState();render();}
+  }));
+  on('btn-home','click',()=>{S.view='home';render();});
   on('btn-add-char','click',()=>show('modal-char'));
   on('close-char','click',()=>hide('modal-char'));
-  on('confirm-char','click',addChar);
-  on('btn-new-ep','click',createEp);
-  document.querySelectorAll('[data-open-ep]').forEach(el=>el.addEventListener('click',()=>openEp(el.dataset.openEp)));
-  document.querySelectorAll('[data-del-char]').forEach(el=>el.addEventListener('click',()=>delChar(el.dataset.delChar)));
-
-  // STUDIO
-  document.querySelectorAll('.ton-btn').forEach(b=>b.addEventListener('click',()=>{ S.studio.ton=b.dataset.ton; render(); }));
-  on('ep-title','input',e=>{ S.studio.title=e.target.value; });
-  on('ep-script','input',e=>{ S.studio.script=e.target.value; const btn=$('btn-s1-next'); if(btn) btn.disabled=!e.target.value.trim(); });
-
+  on('confirm-char','click',()=>{
+    const n=$('char-name')?.value?.trim(),d=$('char-desc')?.value?.trim();
+    if(!n||!d){alert('Remplis tout');return;}
+    const p=getProj(); if(!p)return;
+    p.characters.push({id:uid(),name:n,role:$('char-role')?.value||'Principal',description:d});
+    saveState();hide('modal-char');render();
+  });
+  document.querySelectorAll('[data-del-char]').forEach(el=>el.addEventListener('click',()=>{
+    const p=getProj();if(!p)return;
+    p.characters=p.characters.filter(c=>c.id!==el.dataset.delChar);saveState();render();
+  }));
+  on('btn-new-ep','click',()=>{
+    const p=getProj();if(!p)return;
+    const ep={id:uid(),title:`Épisode ${p.episodes.length+1}`,script:'',audioUrl:null,images:[],videoUrl:null};
+    p.episodes.push(ep);saveState();
+    S.epId=ep.id;S.studio=freshStudio();S.view='studio';render();
+  });
+  document.querySelectorAll('[data-open-ep]').forEach(el=>el.addEventListener('click',()=>{
+    S.epId=el.dataset.openEp;const ep=getEp();if(!ep)return;
+    S.studio=freshStudio();S.studio.title=ep.title||'';S.studio.script=ep.script||'';
+    if(ep.audioUrl)S.studio.audioUrl=ep.audioUrl;
+    if(ep.images?.length>0)S.studio.segments=ep.images.map(i=>({text:i.text||'',prompt:'',imgUrl:i.url||'',status:i.url?'done':'idle'}));
+    if(ep.videoUrl)S.studio.videoUrl=ep.videoUrl;
+    S.view='studio';render();
+  }));
+  // Studio
+  document.querySelectorAll('.ton-btn').forEach(b=>b.addEventListener('click',()=>{S.studio.ton=b.dataset.ton;render();}));
+  on('ep-title','input',e=>{S.studio.title=e.target.value;});
+  on('ep-script','input',e=>{S.studio.script=e.target.value;const b=$('btn-s1-next');if(b)b.disabled=!e.target.value.trim();});
   on('btn-enrich','click',async()=>{
-    const sc=$('ep-script')?.value?.trim()||S.studio.script;
-    if(!sc) return;
-    S.studio.script=sc; S.studio.busy=true; S.studio.error=null; render();
-    try{ S.studio.script=await enrichScript(sc,S.studio.ton,getProj()?.characters||[]); }
-    catch(e){ S.studio.error=e.message; }
-    S.studio.busy=false; render();
+    const sc=$('ep-script')?.value?.trim()||S.studio.script;if(!sc)return;
+    S.studio.script=sc;S.studio.busy=true;S.studio.error=null;render();
+    try{S.studio.script=await enrichScript(sc,S.studio.ton,getProj()?.characters||[]);}catch(e){S.studio.error=e.message;}
+    S.studio.busy=false;render();
   });
-
   on('btn-s1-next','click',()=>{
-    S.studio.title=$('ep-title')?.value||S.studio.title;
-    S.studio.script=$('ep-script')?.value||S.studio.script;
-    patchEp({title:S.studio.title,script:S.studio.script});
-    S.studio.step=2; S.studio.error=null; render();
+    S.studio.title=$('ep-title')?.value||S.studio.title;S.studio.script=$('ep-script')?.value||S.studio.script;
+    patchEp({title:S.studio.title,script:S.studio.script});S.studio.step=2;S.studio.error=null;render();
   });
-
   on('btn-gen-audio','click',async()=>{
-    S.studio.busy=true; S.studio.error=null; render();
-    try{
-      const blob=await generateAudio();
-      const url=URL.createObjectURL(blob);
-      S.studio.audioBlob=blob; S.studio.audioUrl=url;
-      patchEp({audioUrl:url});
-    }catch(e){ S.studio.error='Audio: '+e.message; }
-    S.studio.busy=false; render();
-    setTimeout(()=>{ const a=$('audio-el'); if(a) a.onloadedmetadata=()=>{ S.studio.audioDuration=a.duration; }; },100);
+    S.studio.busy=true;S.studio.error=null;render();
+    try{const b=await generateAudio();const u=URL.createObjectURL(b);S.studio.audioBlob=b;S.studio.audioUrl=u;patchEp({audioUrl:u});}catch(e){S.studio.error='Audio: '+e.message;}
+    S.studio.busy=false;render();
+    setTimeout(()=>{const a=$('audio-el');if(a)a.onloadedmetadata=()=>{S.studio.audioDuration=a.duration;};},200);
   });
-  on('btn-regen-audio','click',()=>{ S.studio.audioUrl=null; S.studio.audioBlob=null; render(); });
-  on('btn-s2-back','click',()=>{ S.studio.step=1; render(); });
+  on('btn-regen-audio','click',()=>{S.studio.audioUrl=null;S.studio.audioBlob=null;S.studio.audioDuration=0;render();});
+  on('btn-s2-back','click',()=>{S.studio.step=1;render();});
   on('btn-s2-next','click',()=>{
-    const a=$('audio-el'); if(a) S.studio.audioDuration=a.duration||0;
-    // Init segments
-    if(S.studio.segments.length===0){
-      const segs=toSegments(S.studio.script);
-      S.studio.segments=segs.map(text=>({text,prompt:'',imgUrl:'',status:'idle'}));
-    }
-    S.studio.step=3; S.studio.error=null; render();
+    const a=$('audio-el');if(a)S.studio.audioDuration=a.duration||0;
+    if(S.studio.segments.length===0){const segs=toSegments(S.studio.script);S.studio.segments=segs.map(t=>({text:t,prompt:'',imgUrl:'',status:'idle'}));}
+    S.studio.step=3;S.studio.error=null;render();
   });
-
   on('btn-gen-imgs','click',doGenerateImages);
-  on('btn-s3-back','click',()=>{ S.studio.step=2; render(); });
-  on('btn-s3-next','click',()=>{ S.studio.step=4; S.studio.error=null; render(); });
-
+  on('btn-s3-back','click',()=>{S.studio.step=2;render();});
+  on('btn-s3-next','click',()=>{S.studio.step=4;S.studio.error=null;render();});
   on('btn-gen-vid','click',async()=>{
     const urls=S.studio.segments.filter(s=>s.status==='done'&&s.imgUrl).map(s=>s.imgUrl);
-    if(!urls.length){alert('Aucune image prête');return;}
-    if(!S.studio.audioBlob){alert('Aucun audio');return;}
-    S.studio.busy=true; S.studio.error=null; render();
+    if(!urls.length){alert('Aucune image');return;}if(!S.studio.audioBlob){alert('Aucun audio');return;}
+    S.studio.busy=true;S.studio.error=null;render();
     try{
       const blob=await generateVideo(urls,S.studio.audioBlob,(pct,msg)=>{
-        const b=$('vid-bar'),t=$('vid-txt');
-        if(b) b.style.width=pct+'%'; if(t) t.textContent=msg;
+        const b=$('vid-bar'),t=$('vid-txt');if(b)b.style.width=pct+'%';if(t)t.textContent=msg;
       });
-      S.studio.videoBlob=blob;
-      S.studio.videoUrl=URL.createObjectURL(blob);
-      patchEp({videoUrl:S.studio.videoUrl});
-    }catch(e){ S.studio.error='Vidéo: '+e.message; }
-    S.studio.busy=false; render();
+      S.studio.videoBlob=blob;S.studio.videoUrl=URL.createObjectURL(blob);patchEp({videoUrl:S.studio.videoUrl});
+    }catch(e){S.studio.error='Vidéo: '+e.message;}
+    S.studio.busy=false;render();
   });
-  on('btn-regen-vid','click',()=>{ S.studio.videoUrl=null; S.studio.videoBlob=null; render(); });
-  on('btn-s4-back','click',()=>{ S.studio.step=3; render(); });
-  on('btn-new-ep-2','click',()=>{ S.view='project'; S.epId=null; S.studio=freshStudio(); render(); });
-  on('btn-back-proj','click',()=>{ S.view='project'; S.epId=null; render(); });
-
-  on('btn-zip','click',async()=>{
-    try{
-      const zip=new JSZip(); const folder=zip.folder('papa_conteur');
-      await Promise.all(S.studio.segments.filter(s=>s.imgUrl).map(async(s,i)=>{
-        try{ const r=await fetch(s.imgUrl); folder.file(`${String(i+1).padStart(2,'0')}.jpg`,await r.blob()); }catch(e){}
-      }));
-      if(S.studio.audioBlob) folder.file('voix.wav',S.studio.audioBlob);
-      folder.file('notice.txt','Importe les images dans CapCut dans l\'ordre.\nAjoute voix.wav sur la piste audio.\nExporte en 1080x1920.');
-      const blob=await zip.generateAsync({type:'blob'});
-      const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-      a.download=`papa_conteur_${S.studio.title||'ep'}.zip`; a.click();
-    }catch(e){ alert('ZIP: '+e.message); }
-  });
-}
-
-// ═══════════════════════════════════════
-// ACTIONS
-// ═══════════════════════════════════════
-function createProj() {
-  const name=$('proj-name')?.value?.trim();
-  if(!name){alert('Donne un nom');return;}
-  const p={id:uid(),name,characters:[],episodes:[],seed:Math.floor(10000+Math.random()*90000),createdAt:new Date().toISOString()};
-  S.projects.unshift(p); saveState();
-  S.projId=p.id; S.view='project'; render();
-}
-function delProj(id){
-  if(!confirm('Supprimer cette série ?')) return;
-  S.projects=S.projects.filter(p=>p.id!==id); saveState(); render();
-}
-function openProj(id){ S.projId=id; S.view='project'; render(); }
-
-function addChar(){
-  const name=$('char-name')?.value?.trim();
-  const desc=$('char-desc')?.value?.trim();
-  if(!name||!desc){alert('Remplis nom et description');return;}
-  const p=getProj(); if(!p) return;
-  p.characters.push({id:uid(),name,role:$('char-role')?.value||'Principal',description:desc});
-  saveState(); hide('modal-char'); render();
-}
-function delChar(id){
-  const p=getProj(); if(!p) return;
-  p.characters=p.characters.filter(c=>c.id!==id); saveState(); render();
-}
-
-function createEp(){
-  const p=getProj(); if(!p) return;
-  const ep={id:uid(),title:`Épisode ${p.episodes.length+1}`,script:'',audioUrl:null,images:[],videoUrl:null,createdAt:new Date().toISOString()};
-  p.episodes.push(ep); saveState(); openEp(ep.id);
-}
-
-function openEp(id){
-  S.epId=id;
-  const ep=getEp(); if(!ep) return;
-  S.studio=freshStudio();
-  S.studio.title=ep.title||'';
-  S.studio.script=ep.script||'';
-  if(ep.audioUrl) S.studio.audioUrl=ep.audioUrl;
-  if(ep.images?.length>0){
-    S.studio.segments=ep.images.map(img=>({text:img.text||'',prompt:'',imgUrl:img.url||'',status:img.url?'done':'idle'}));
-    S.studio.step=ep.videoUrl?4:ep.audioUrl?3:ep.images.length>0?3:1;
-  }
-  if(ep.videoUrl) S.studio.videoUrl=ep.videoUrl;
-  S.view='studio'; render();
+  on('btn-regen-vid','click',()=>{S.studio.videoUrl=null;S.studio.videoBlob=null;render();});
+  on('btn-s4-back','click',()=>{S.studio.step=3;render();});
+  on('btn-new-ep-2','click',()=>{S.view='project';S.epId=null;S.studio=freshStudio();render();});
+  on('btn-back-proj','click',()=>{S.view='project';S.epId=null;render();});
 }
 
 // ═══════════════════════════════════════
@@ -1137,6 +1047,7 @@ function openEp(id){
 // ═══════════════════════════════════════
 loadState();
 render();
+console.log('🪘 Papa Conteur v5 — Prêt');
 </script>
 </body>
 </html>
