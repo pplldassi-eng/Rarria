@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Papa Conteur — Studio TikTok Africain</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+:root {
+  --bg:#0D0A08;--bg2:#1A1008;--bg3:#231508;
+  --primary:#E85D26;--primary2:#c44d1a;
+  --gold:#C4923A;--gold2:#a87830;
+  --brown:#3D2314;--brown2:#2a180e;
+  --text:#FAF7F2;--text2:#C8A898;--text3:#886050;
+  --radius:1.2rem;--radius2:2rem;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+#app{min-height:100vh;display:flex;flex-direction:column}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--brown);border-radius:2px}
+h1,h2,h3{font-family:'Playfair Display',serif}
+.brand{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.5rem;border:none;border-radius:var(--radius);font-family:'Barlow',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .2s;outline:none}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary2);transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:#0D0A08}
+.btn-gold:hover{background:var(--gold2)}
+.btn-brown{background:var(--brown);color:var(--text)}
+.btn-brown:hover{background:var(--brown2)}
+.btn-ghost{background:transparent;border:2px solid var(--brown);color:var(--text2)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-danger{background:#8B1A1A;color:#fff}
+.btn-danger:hover{background:#6d1414}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-full{width:100%}
+.btn-sm{padding:.5rem 1rem;font-size:.85rem}
+.card{background:var(--bg2);border:1px solid rgba(196,146,58,.15);border-radius:var(--radius2);padding:1.5rem}
+.input,.textarea,.select{width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(196,146,58,.2);border-radius:var(--radius);color:var(--text);font-family:'Barlow',sans-serif;font-size:1rem;padding:.85rem 1rem;outline:none;transition:border-color .2s}
+.input:focus,.textarea:focus,.select:focus{border-color:var(--gold)}
+.textarea{resize:vertical;min-height:140px;line-height:1.6}
+.select option{background:var(--bg2)}
+.label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.tag{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .75rem;border-radius:99px;font-size:.75rem;font-weight:700}
+.tag-primary{background:rgba(232,93,38,.2);color:var(--primary)}
+.tag-gold{background:rgba(196,146,58,.2);color:var(--gold)}
+.progress-bar{height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--gold));border-radius:3px;transition:width .4s ease}
+.spinner{width:24px;height:24px;border:3px solid rgba(255,255,255,.2);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.steps{display:flex;align-items:center;gap:0;margin-bottom:2rem}
+.step-item{display:flex;align-items:center;flex:1}
+.step-circle{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;transition:all .3s}
+.step-circle.active{background:var(--primary);color:#fff}
+.step-circle.done{background:var(--gold);color:#0D0A08}
+.step-circle.pending{background:var(--brown);color:var(--text3)}
+.step-line{flex:1;height:2px;background:var(--brown);transition:background .3s}
+.step-line.done{background:var(--gold)}
+.step-label{font-size:.65rem;text-align:center;color:var(--text3);margin-top:.3rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:100;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
+.modal{background:var(--bg2);border-radius:var(--radius2) var(--radius2) 0 0;padding:2rem 1.5rem;width:100%;max-width:600px;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.modal-close{background:var(--brown);border:none;color:var(--text2);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center}
+.header{background:var(--bg2);border-bottom:1px solid rgba(196,146,58,.15);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:50}
+.header-back{background:var(--brown);border:none;color:var(--text2);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.header-title{font-family:'Playfair Display',serif;font-size:1.1rem;flex:1}
+.header-sub{font-size:.75rem;color:var(--text3);font-weight:400}
+.hero{text-align:center;padding:3rem 1.5rem 2rem;background:radial-gradient(ellipse at 50% 0%, rgba(196,146,58,.15) 0%, transparent 70%)}
+.hero-icon{font-size:3.5rem;margin-bottom:1rem;display:block}
+.hero h1{font-size:2.2rem;margin-bottom:.5rem}
+.hero p{color:var(--text2);font-size:1rem;max-width:320px;margin:0 auto}
+.projects-grid{padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+.project-card{background:var(--bg2);border:1px solid rgba(196,146,58,.15);border-radius:var(--radius2);padding:1.5rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.project-card:hover{border-color:rgba(196,146,58,.4);transform:translateY(-2px)}
+.project-card-name{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:.5rem}
+.project-card-meta{display:flex;gap:.75rem;flex-wrap:wrap}
+.project-card-actions{display:flex;gap:.5rem;margin-top:1rem}
+.char-card{background:var(--bg3);border:1px solid rgba(61,35,20,.7);border-radius:var(--radius);padding:1rem;display:flex;align-items:center;gap:1rem;margin-bottom:.5rem}
+.char-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--gold));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.char-info{flex:1;min-width:0}
+.char-name{font-weight:700;margin-bottom:.2rem}
+.char-desc{font-size:.8rem;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.char-btn{background:var(--brown);border:none;color:var(--text2);width:32px;height:32px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.char-btn.del:hover{background:#8B1A1A}
+.ep-card{background:var(--bg3);border:1px solid rgba(61,35,20,.5);border-radius:var(--radius);padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:all .2s;margin-bottom:.5rem}
+.ep-card:hover{border-color:rgba(196,146,58,.3);background:var(--bg2)}
+.ep-num{width:40px;height:40px;border-radius:50%;background:var(--brown);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0}
+.ep-info{flex:1}
+.ep-title{font-weight:700;margin-bottom:.2rem}
+.ep-status{font-size:.75rem;color:var(--text3)}
+.studio-content{padding:1.5rem;flex:1}
+.field-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem}
+.ton-selector{display:flex;gap:.75rem}
+.ton-btn{flex:1;padding:.75rem;background:var(--brown);border:2px solid transparent;border-radius:var(--radius);color:var(--text2);font-family:'Barlow',sans-serif;font-weight:700;cursor:pointer;transition:all .2s}
+.ton-btn.active{background:rgba(232,93,38,.2);border-color:var(--primary);color:var(--primary)}
+.alert{padding:1rem;border-radius:var(--radius);font-size:.9rem;display:flex;align-items:flex-start;gap:.75rem;margin-bottom:1rem}
+.alert-error{background:rgba(139,26,26,.2);border:1px solid rgba(139,26,26,.5);color:#ff8080}
+.alert-success{background:rgba(34,85,34,.2);border:1px solid rgba(34,85,34,.5);color:#80cc80}
+.alert-info{background:rgba(196,146,58,.1);border:1px solid rgba(196,146,58,.3);color:var(--gold)}
+.audio-player{background:var(--bg3);border:1px solid var(--brown);border-radius:var(--radius);padding:1rem;display:flex;flex-direction:column;gap:.75rem;margin-bottom:1rem}
+audio{width:100%;height:36px;outline:none}
+.sep{height:1px;background:rgba(196,146,58,.1);margin:1.5rem 0}
+
+/* ═══ IMAGE GRID ═══ */
+.images-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
+.img-slot{aspect-ratio:9/16;background:var(--bg3);border:2px solid var(--brown);border-radius:var(--radius);overflow:hidden;position:relative;transition:border-color .3s}
+.img-slot.done{border-color:rgba(196,146,58,.5)}
+.img-slot.error{border-color:rgba(139,26,26,.5)}
+.img-slot img{width:100%;height:100%;object-fit:cover;display:block}
+.img-slot-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;opacity:0;transition:opacity .2s}
+.img-slot:hover .img-slot-overlay{opacity:1}
+.img-slot-body{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.5rem}
+.img-slot-label{font-size:.65rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;text-align:center}
+.img-slot-num{font-size:1.8rem;font-weight:900;color:var(--brown);font-family:'Playfair Display',serif}
+.img-counter-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+
+/* Utils */
+.flex{display:flex}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-1{gap:.5rem}.gap-2{gap:1rem}.flex-1{flex:1}
+.mt-1{margin-top:.5rem}.mt-2{margin-top:1rem}.mt-3{margin-top:1.5rem}
+.mb-1{margin-bottom:.5rem}.mb-2{margin-bottom:1rem}.mb-3{margin-bottom:1.5rem}
+.text-center{text-align:center}.text-sm{font-size:.85rem}.text-xs{font-size:.75rem}
+.text-gold{color:var(--gold)}.text-primary{color:var(--primary)}.text-muted{color:var(--text3)}
+.font-bold{font-weight:700}.hidden{display:none}.w-full{width:100%}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+'use strict';
+// ═══════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════
+const $  = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const uid  = () => Date.now().toString(36) + Math.random().toString(36).slice(2);
+
+// ═══════════════════════════════════════
+// GEMINI KEY
+// ═══════════════════════════════════════
+const getKey = () => localStorage.getItem('pc_gemini_key') || '';
+
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let S = {
+  view: 'home',
+  projects: [],
+  projId: null,
+  epId: null,
+  studio: freshStudio()
+};
+
+function freshStudio() {
+  return {
+    step:1, title:'', script:'', ton:'Mystérieux',
+    audioBlob:null, audioUrl:null, audioDuration:0,
+    segments:[], // {text, prompt, imgUrl, status:'idle'|'loading'|'done'|'error'}
+    videoUrl:null, videoBlob:null,
+    busy:false, error:null,
+    imgProgress:0, imgTotal:0
+  };
+}
+
+// ═══════════════════════════════════════
+// PERSIST
+// ═══════════════════════════════════════
+function loadState() {
+  try { const d = JSON.parse(localStorage.getItem('pc_v4')||'{}'); S.projects = d.projects||[]; } catch(e){ S.projects=[]; }
+}
+function saveState() {
+  try { localStorage.setItem('pc_v4', JSON.stringify({projects:S.projects})); } catch(e){}
+}
+
+// ═══════════════════════════════════════
+// PROJECT / EPISODE HELPERS
+// ═══════════════════════════════════════
+const getProj  = () => S.projects.find(p => p.id === S.projId);
+const getEp    = () => { const p=getProj(); return p ? p.episodes.find(e=>e.id===S.epId) : null; };
+function patchEp(data) {
+  const p=getProj(); if(!p) return;
+  const i=p.episodes.findIndex(e=>e.id===S.epId);
+  if(i>=0){ p.episodes[i]={...p.episodes[i],...data}; saveState(); }
+}
+
+// ═══════════════════════════════════════
+// TEXT UTILS
+// ═══════════════════════════════════════
+function toSegments(script) {
+  return script.split(/\n\n+/).map(p=>p.trim()).filter(p=>p.length>10).slice(0,6);
+}
+function cleanForTTS(text) {
+  return text.replace(/\[.*?\]/g,' ').replace(/\*+/g,'').replace(/#{1,6}\s/g,'').replace(/\s{2,}/g,' ').trim();
+}
+function chunkText(text, max) {
+  const out=[]; let cur=text.trim();
+  while(cur.length>0){
+    if(cur.length<=max){out.push(cur);break;}
+    let i=cur.lastIndexOf(' ',max); if(i<0)i=max;
+    out.push(cur.slice(0,i).trim()); cur=cur.slice(i).trim();
+  }
+  return out.filter(c=>c.length>0);
+}
+
+// ═══════════════════════════════════════
+// GEMINI
+// ═══════════════════════════════════════
+async function gemini(prompt) {
+  const key=getKey();
+  if(!key) throw new Error('Clé Gemini manquante — enregistre-la en haut');
+  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`,{
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.75,maxOutputTokens:2048}})
+  });
+  if(!r.ok){ const e=await r.json().catch(()=>({})); throw new Error('Gemini '+r.status+': '+(e.error?.message||'erreur clé')); }
+  const d=await r.json();
+  return d.candidates?.[0]?.content?.parts?.[0]?.text||'';
+}
+
+async function enrichScript(script, ton, chars) {
+  const cl=chars.map(c=>`- ${c.name} (${c.role}): ${c.description}`).join('\n');
+  return await gemini(`Tu es un vieux conteur africain mystérieux.
+Enrichis ce script TikTok:
+1. Première phrase = choc en <10 mots
+2. Ajoute [SILENCE] [SUSPENSE] [TAMBOUR] [FORET] [CHUCHOTE] sur lignes séparées
+3. Zéro markdown, zéro astérisque, texte pur, lignes vides entre paragraphes
+4. Chaque paragraphe finit en suspense
+5. Ton: ${ton==='Mystérieux'?'sombre, terreur max':'chaleureux, mystère doux'}
+${cl?'Personnages:\n'+cl:''}
+SCRIPT:
+${script}
+Réponds UNIQUEMENT avec le script enrichi.`);
+}
+
+async function getKeywords(segs, chars, ton) {
+  const mc=chars.find(c=>c.role==='Principal')||chars[0];
+  const cd=mc?mc.description.slice(0,80):'african person';
+  try {
+    const raw=await gemini(`Give 5 English keywords per scene for a cinematic photo.
+Return ONLY a JSON array, one string per scene.
+Style: ${ton==='Mystérieux'?'dark horror african cinematic':'warm african folk tale cinematic'}
+Character: ${cd}
+Scenes:
+${segs.map((s,i)=>`${i+1}. ${s.slice(0,120)}`).join('\n')}
+Return ONLY the JSON array, no markdown.`);
+    const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    if(Array.isArray(parsed)) return parsed;
+  } catch(e){}
+  return segs.map(()=>'mysterious african night, cinematic shadows, moonlight');
+}
+
+// ═══════════════════════════════════════
+// ✅ IMAGE ENGINE — COMPLETELY REWRITTEN
+// Strategy: pure <img> tag loading with
+// canvas pixel-check to detect black images
+// + multiple provider fallback
+// ═══════════════════════════════════════
+
+// Build Pollinations URL — NO enhance, short prompt, model=flux
+function pollinationsUrl(prompt, seed) {
+  const p = prompt.slice(0, 120); // keep prompt short
+  return `https://image.pollinations.ai/prompt/${encodeURIComponent(p)}?width=576&height=1024&seed=${seed}&nologo=true&model=flux`;
+}
+
+// Check if an img element is truly rendered (not black)
+// by sampling a few canvas pixels
+function isImageReal(imgEl) {
+  try {
+    const cv = document.createElement('canvas');
+    cv.width = 20; cv.height = 20;
+    const ctx = cv.getContext('2d');
+    ctx.drawImage(imgEl, 0, 0, 20, 20);
+    const d = ctx.getImageData(0, 0, 20, 20).data;
+    let sum = 0;
+    for(let i=0; i<d.length; i+=4) sum += d[i]+d[i+1]+d[i+2];
+    // If all pixels are near-black, sum will be very low
+    return sum > 500; // at least some non-black pixels
+  } catch(e) {
+    // CORS block on canvas = image came from external origin
+    // If we can't read pixels, assume image is real (it loaded)
+    return true;
+  }
+}
+
+// Load one image via <img> tag with timeout and pixel check
+function loadImgTag(url, timeoutMs = 45000) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    let done = false;
+
+    const finish = (result) => {
+      if(done) return;
+      done = true;
+      clearTimeout(timer);
+      img.onload = img.onerror = null;
+      resolve(result);
+    };
+
+    const timer = setTimeout(() => finish(null), timeoutMs);
+
+    img.onload = () => {
+      // Small delay to let image fully decode
+      setTimeout(() => {
+        if(img.naturalWidth < 10 || img.naturalHeight < 10) {
+          finish(null); return;
+        }
+        // Pixel check — detect black images
+        const real = isImageReal(img);
+        finish(real ? img.src : null);
+      }, 200);
+    };
+
+    img.onerror = () => finish(null);
+    img.src = url;
+  });
+}
+
+// ✅ Main image generation for one slot
+// Tries multiple seeds, waits properly between attempts
+async function generateSlotImage(prompt, slotIdx, projSeed, maxAttempts = 6) {
+  // Seeds: project-based first, then random
+  const seeds = [
+    projSeed + slotIdx * 137,
+    projSeed + slotIdx * 251 + 1000,
+    Math.floor(Math.random()*900000)+100000,
+    Math.floor(Math.random()*900000)+100000,
+    Math.floor(Math.random()*900000)+100000,
+    Math.floor(Math.random()*900000)+100000,
+  ].slice(0, maxAttempts);
+
+  for(let a = 0; a < seeds.length; a++) {
+    const seed = seeds[a];
+
+    // Update slot UI
+    updateSlotLoading(slotIdx, `${a+1}/${seeds.length}`);
+
+    // ✅ KEY: wait BEFORE fetching, give Pollinations time to generate
+    // First attempt: 4s, subsequent: 7s
+    await sleep(a === 0 ? 4000 : 7000);
+
+    const url = pollinationsUrl(prompt, seed);
+    console.log(`[img ${slotIdx+1}] attempt ${a+1} seed=${seed}`);
+
+    const result = await loadImgTag(url, 40000);
+
+    if(result) {
+      console.log(`[img ${slotIdx+1}] ✅ OK attempt ${a+1}`);
+      return result;
+    }
+
+    console.warn(`[img ${slotIdx+1}] ❌ attempt ${a+1} failed`);
+  }
+
+  return null;
+}
+
+// Update a single slot's loading state without re-rendering
+function updateSlotLoading(idx, attempt) {
+  const slot = $(`slot-${idx}`);
+  if(!slot) return;
+  const badge = slot.querySelector('.attempt-badge');
+  if(badge) badge.textContent = `Tentative ${attempt}`;
+}
+
+// ═══════════════════════════════════════
+// FULL IMAGE GENERATION FLOW
+// ═══════════════════════════════════════
+async function doGenerateImages() {
+  if(S.studio.busy) return;
+  S.studio.busy = true;
+  S.studio.error = null;
+
+  // Init segments if needed
+  if(S.studio.segments.length === 0) {
+    const segs = toSegments(S.studio.script);
+    S.studio.segments = segs.map(text=>({text, prompt:'', imgUrl:'', status:'idle'}));
+  }
+
+  // Reset all to idle
+  S.studio.segments = S.studio.segments.map(s=>({...s, imgUrl:'', status:'idle'}));
+  S.studio.imgProgress = 0;
+  S.studio.imgTotal = S.studio.segments.length;
+  render(); // show the grid
+
+  const proj = getProj();
+  const chars = proj ? proj.characters : [];
+  const projSeed = proj?.seed || 42000;
+
+  // Get keywords from Gemini
+  let keywords;
+  try {
+    keywords = await getKeywords(S.studio.segments.map(s=>s.text), chars, S.studio.ton);
+  } catch(e) {
+    keywords = S.studio.segments.map(()=>'dark mysterious african night cinematic moonlight');
+  }
+
+  const mc = chars.find(c=>c.role==='Principal')||chars[0];
+  const charDesc = mc ? mc.description.slice(0,60) : 'african person';
+
+  // ✅ SEQUENTIAL — one at a time
+  for(let i = 0; i < S.studio.segments.length; i++) {
+    S.studio.segments[i].status = 'loading';
+
+    // Render the slot as loading immediately
+    renderSlot(i);
+
+    // Update progress text
+    updateProgressText(i);
+
+    const kw = keywords[i] || 'mysterious african night cinematic';
+    const prompt = `${kw}, ${charDesc}, dramatic lighting, realistic photo, 8k`;
+    S.studio.segments[i].prompt = prompt;
+
+    const url = await generateSlotImage(prompt, i, projSeed);
+
+    if(url) {
+      S.studio.segments[i].imgUrl = url;
+      S.studio.segments[i].status = 'done';
+    } else {
+      S.studio.segments[i].status = 'error';
+    }
+
+    S.studio.imgProgress = i + 1;
+    renderSlot(i);
+    updateCounterBar();
+
+    // Short gap between images
+    if(i < S.studio.segments.length - 1) await sleep(1500);
+  }
+
+  S.studio.busy = false;
+  patchEp({ images: S.studio.segments.map(s=>({text:s.text,url:s.imgUrl})) });
+
+  // Final re-render to update button states
+  render();
+}
+
+// Render a single slot without full re-render
+function renderSlot(i) {
+  const slot = $(`slot-${i}`);
+  if(!slot) return;
+  const seg = S.studio.segments[i];
+  slot.className = `img-slot ${seg.status}`;
+  if(seg.status === 'done' && seg.imgUrl) {
+    slot.innerHTML = `
+      <img src="${seg.imgUrl}" alt="">
+      <div class="img-slot-overlay">
+        <button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺ Régénérer</button>
+        <label class="btn btn-brown btn-sm" style="cursor:pointer">
+          📁 Galerie
+          <input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)">
+        </label>
+      </div>`;
+  } else if(seg.status === 'loading') {
+    slot.innerHTML = `
+      <div class="img-slot-body">
+        <div class="spinner"></div>
+        <span class="img-slot-label attempt-badge">Génération...</span>
+      </div>`;
+  } else if(seg.status === 'error') {
+    slot.innerHTML = `
+      <div class="img-slot-body">
+        <span style="font-size:1.5rem">❌</span>
+        <span class="img-slot-label">Échec</span>
+        <button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺ Retry</button>
+        <label class="btn btn-brown btn-sm" style="cursor:pointer;font-size:.75rem">
+          📁 Importer
+          <input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)">
+        </label>
+      </div>`;
+  } else {
+    slot.innerHTML = `
+      <div class="img-slot-body" style="opacity:.3">
+        <span class="img-slot-num">${i+1}</span>
+        <span class="img-slot-label">En attente</span>
+      </div>`;
+  }
+}
+
+function updateCounterBar() {
+  const done = S.studio.segments.filter(s=>s.status==='done').length;
+  const total = S.studio.segments.length;
+  const el = $('img-counter');
+  const bar = $('img-pbar');
+  if(el) el.textContent = `${done}/${total} images prêtes`;
+  if(bar) bar.style.width = (done/Math.max(total,1)*100)+'%';
+}
+
+function updateProgressText(i) {
+  const el = $('img-prog-txt');
+  if(el) el.textContent = `⏳ Image ${i+1}/${S.studio.segments.length} en cours...`;
+}
+
+// ═══ REGEN ONE ═══
+window.regenOne = async function(i) {
+  if(S.studio.busy) return;
+  S.studio.busy = true;
+  S.studio.segments[i].status = 'loading';
+  S.studio.segments[i].imgUrl = '';
+  renderSlot(i);
+
+  const proj = getProj();
+  const projSeed = proj?.seed || 42000;
+  const prompt = S.studio.segments[i].prompt || 'mysterious african night cinematic';
+  const newSeed = Math.floor(Math.random()*900000)+100000;
+
+  await sleep(2000);
+  const url = await generateSlotImage(prompt, i, newSeed, 4);
+
+  S.studio.segments[i].imgUrl = url || '';
+  S.studio.segments[i].status = url ? 'done' : 'error';
+  S.studio.busy = false;
+  renderSlot(i);
+  updateCounterBar();
+};
+
+// ═══ IMPORT FROM GALLERY ═══
+window.importImg = function(i, input) {
+  const file = input.files?.[0];
+  if(!file) return;
+  const url = URL.createObjectURL(file);
+  S.studio.segments[i] = {...S.studio.segments[i], imgUrl:url, status:'done'};
+  renderSlot(i);
+  updateCounterBar();
+};
+
+// ═══════════════════════════════════════
+// AUDIO (TTS)
+// ═══════════════════════════════════════
+async function generateAudio() {
+  const clean = cleanForTTS(S.studio.script);
+  if(!clean) throw new Error('Script vide');
+  try { return await ttsProxy(clean); }
+  catch(e) { return await ttsWebSpeech(clean); }
+}
+
+async function ttsProxy(text) {
+  const chunks = chunkText(text, 180);
+  const ctx = new(window.AudioContext||window.webkitAudioContext)();
+  const bufs = [];
+  const proxies = ['https://api.allorigins.win/raw?url=','https://corsproxy.io/?'];
+  for(const chunk of chunks) {
+    const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=fr&client=tw-ob&slow=true&q=${encodeURIComponent(chunk)}`;
+    let ok = false;
+    for(const px of proxies) {
+      try {
+        const r=await fetch(px+encodeURIComponent(ttsUrl));
+        if(!r.ok) continue;
+        const ab=await r.arrayBuffer();
+        if(ab.byteLength<100) continue;
+        bufs.push(await ctx.decodeAudioData(ab.slice(0)));
+        ok=true; break;
+      } catch(e){}
+    }
+    if(!ok) throw new Error('TTS proxy failed');
+  }
+  const sr=bufs[0].sampleRate, len=bufs.reduce((s,b)=>s+b.length,0);
+  const combined=ctx.createBuffer(1,len,sr);
+  const ch=combined.getChannelData(0);
+  let off=0; for(const b of bufs){ch.set(b.getChannelData(0),off);off+=b.length;}
+  ctx.close();
+  return wavBlob(combined);
+}
+
+async function ttsWebSpeech(text) {
+  return new Promise((res,rej)=>{
+    if(!window.speechSynthesis){rej(new Error('no speech'));return;}
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang='fr-FR'; u.rate=0.82; u.pitch=0.8;
+    const v=speechSynthesis.getVoices().find(v=>v.lang.startsWith('fr'));
+    if(v) u.voice=v;
+    const dur=Math.max(10,(text.split(/\s+/).length/150)*60/0.82);
+    u.onstart=()=>res(silentWav(22050,Math.ceil(dur*22050)));
+    u.onerror=e=>rej(new Error(e.error));
+    speechSynthesis.cancel();
+    setTimeout(()=>speechSynthesis.speak(u),100);
+  });
+}
+
+function wavBlob(buffer) {
+  const sr=buffer.sampleRate, s=buffer.getChannelData(0), ds=s.length*2;
+  const ab=new ArrayBuffer(44+ds), v=new DataView(ab);
+  const ws=(o,str)=>{for(let i=0;i<str.length;i++)v.setUint8(o+i,str.charCodeAt(i));};
+  ws(0,'RIFF');v.setUint32(4,36+ds,true);ws(8,'WAVE');ws(12,'fmt ');
+  v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+  v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);
+  ws(36,'data');v.setUint32(40,ds,true);
+  let o=44;for(let i=0;i<s.length;i++){const x=Math.max(-1,Math.min(1,s[i]));v.setInt16(o,x<0?x*0x8000:x*0x7FFF,true);o+=2;}
+  return new Blob([ab],{type:'audio/wav'});
+}
+
+function silentWav(sr, n) {
+  const ds=n*2, ab=new ArrayBuffer(44+ds), v=new DataView(ab);
+  const ws=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));};
+  ws(0,'RIFF');v.setUint32(4,36+ds,true);ws(8,'WAVE');ws(12,'fmt ');
+  v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+  v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);
+  ws(36,'data');v.setUint32(40,ds,true);
+  return new Blob([ab],{type:'audio/wav'});
+}
+
+// ═══════════════════════════════════════
+// VIDEO
+// ═══════════════════════════════════════
+async function generateVideo(imgUrls, audioBlob, onProg) {
+  return new Promise(async(resolve,reject)=>{
+    const W=576,H=1024;
+    const cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+    const ctx=cv.getContext('2d');
+
+    onProg(5,'Chargement images...');
+    const imgs=await Promise.all(imgUrls.map(url=>new Promise(res=>{
+      if(!url){res(null);return;}
+      const img=new Image(); img.crossOrigin='anonymous';
+      const t=setTimeout(()=>res(null),30000);
+      img.onload=()=>{clearTimeout(t);res(img);};
+      img.onerror=()=>{clearTimeout(t);res(null);};
+      img.src=url;
+    })));
+    const valid=imgs.filter(Boolean);
+    if(!valid.length){reject(new Error('Aucune image valide'));return;}
+    onProg(15,`${valid.length} images chargées`);
+
+    const aUrl=URL.createObjectURL(audioBlob);
+    const aEl=new Audio(aUrl); aEl.preload='auto';
+    await new Promise(r=>{aEl.onloadedmetadata=r;aEl.onerror=r;setTimeout(r,4000);aEl.load();});
+    const dur=(aEl.duration&&isFinite(aEl.duration))?aEl.duration:imgs.length*7;
+    const dpImg=(dur*1000)/Math.max(imgs.length,1);
+    onProg(20,'Démarrage montage...');
+
+    let aTrack=null;
+    try{const ac=new(window.AudioContext||window.webkitAudioContext)();const src=ac.createMediaElementSource(aEl);const dst=ac.createMediaStreamDestination();src.connect(dst);src.connect(ac.destination);aTrack=dst.stream.getAudioTracks()[0];}catch(e){}
+
+    const vs=cv.captureStream(30);
+    if(aTrack) vs.addTrack(aTrack);
+    const mime=['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'';
+    const rec=new MediaRecorder(vs,mime?{mimeType:mime,videoBitsPerSecond:2500000}:{});
+    const chunks=[]; rec.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
+    rec.onstop=()=>resolve(new Blob(chunks,{type:mime||'video/webm'}));
+    rec.onerror=reject; rec.start(100);
+
+    const kb=[p=>({sx:1+p*.12,tx:-p*10,ty:-p*10}),p=>({sx:1+p*.12,tx:p*10,ty:-p*5}),p=>({sx:1+p*.1,tx:-p*5,ty:p*10})];
+    ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+    await aEl.play().catch(()=>{});
+    const t0=performance.now();
+
+    function draw(){
+      const el=performance.now()-t0;
+      const ii=Math.min(Math.floor(el/dpImg),imgs.length-1);
+      const pr=(el%dpImg)/dpImg;
+      const img=imgs[ii]; const k=kb[ii%kb.length](pr);
+      ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+      if(img){ctx.save();ctx.translate(W/2+k.tx,H/2+k.ty);ctx.scale(k.sx,k.sx);ctx.drawImage(img,-W/2,-H/2,W,H);ctx.restore();}
+      const g=ctx.createLinearGradient(0,H*.7,0,H);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.6)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='rgba(255,255,255,.25)';ctx.font='600 13px sans-serif';ctx.textAlign='right';ctx.textBaseline='top';ctx.fillText('Papa Conteur',W-12,12);
+      const tp=Math.min(el/(dur*1000),1);
+      onProg(20+Math.floor(tp*78),`Montage: ${Math.floor(tp*100)}%`);
+      if(el<dur*1000+300) requestAnimationFrame(draw);
+      else{rec.stop();onProg(100,'✅ Vidéo prête !');}
+    }
+    requestAnimationFrame(draw);
+  });
+}
+
+// ═══════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════
+const render = () => { $('app').innerHTML = buildView(); attachEvents(); };
+
+function buildView() {
+  switch(S.view){
+    case 'home':    return vHome();
+    case 'project': return vProject();
+    case 'studio':  return vStudio();
+    default:        return vHome();
+  }
+}
+
+// ─── HOME ───
+function vHome() {
+  const key=getKey();
+  return `
+  <div class="hero">
+    <span class="hero-icon">🪘</span>
+    <h1><span class="brand">Papa Conteur</span></h1>
+    <p class="text-muted">Studio TikTok — Histoires africaines</p>
+  </div>
+  <div class="projects-grid">
+    <div class="card" style="border-color:rgba(196,146,58,.35)">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-bold" style="font-size:.9rem">🔑 Clé API Gemini</span>
+        ${key?'<span style="color:#80cc80;font-size:.8rem">✅ Enregistrée</span>':'<span style="color:#ff8080;font-size:.8rem">⚠️ Manquante</span>'}
+      </div>
+      <div class="flex gap-1">
+        <input id="gkey" class="input" type="text" placeholder="AIza..." value="${key}" style="flex:1;font-family:monospace;font-size:.85rem">
+        <button class="btn btn-gold" id="btn-save-key" style="white-space:nowrap">💾 Sauver</button>
+      </div>
+      <p style="font-size:.72rem;color:var(--text3);margin-top:.4rem">Gratuit sur <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--gold)">aistudio.google.com</a></p>
+    </div>
+    <button class="btn btn-primary btn-full" id="btn-new-proj">✦ Nouvelle série</button>
+    ${S.projects.length===0?`<div class="card text-center"><p class="text-muted">Aucune série. Commence par en créer une.</p></div>`
+      :S.projects.map(p=>`
+      <div class="project-card">
+        <div class="project-card-name">${p.name}</div>
+        <div class="project-card-meta">
+          <span class="tag tag-gold">👤 ${p.characters.length} perso</span>
+          <span class="tag tag-primary">🎬 ${p.episodes.length} ép.</span>
+        </div>
+        <div class="project-card-actions">
+          <button class="btn btn-gold btn-sm" data-open="${p.id}">Ouvrir</button>
+          <button class="btn btn-danger btn-sm" data-del="${p.id}">Supprimer</button>
+        </div>
+      </div>`).join('')}
+  </div>
+  <div class="modal-overlay hidden" id="modal-proj" style="z-index:200">
+    <div class="modal">
+      <div class="modal-header"><h3>Nouvelle série</h3><button class="modal-close" id="close-proj">✕</button></div>
+      <div class="field-group"><label class="label">Nom</label><input class="input" id="proj-name" placeholder="La Forêt de Minuit"></div>
+      <button class="btn btn-primary btn-full mt-2" id="confirm-proj">Créer</button>
+    </div>
+  </div>`;
+}
+
+// ─── PROJECT ───
+function vProject() {
+  const p=getProj(); if(!p){S.view='home';return vHome();}
+  return `
+  <div class="header">
+    <button class="header-back" id="btn-home">←</button>
+    <div class="header-title">${p.name}<div class="header-sub">Seed: ${p.seed}</div></div>
+  </div>
+  <div style="padding:1.5rem;display:flex;flex-direction:column;gap:1.5rem">
+    <div>
+      <div class="flex items-center justify-between mb-2">
+        <h3 style="font-size:1rem;color:var(--gold)">👤 Personnages</h3>
+        <button class="btn btn-brown btn-sm" id="btn-add-char">+ Ajouter</button>
+      </div>
+      ${p.characters.length===0?'<p class="text-muted text-sm">Aucun personnage.</p>':p.characters.map(c=>`
+      <div class="char-card">
+        <div class="char-avatar">${c.name[0]}</div>
+        <div class="char-info">
+          <div class="char-name">${c.name} <span class="tag tag-${c.role==='Principal'?'primary':'gold'}" style="font-size:.65rem">${c.role}</span></div>
+          <div class="char-desc">${c.description}</div>
+        </div>
+        <button class="char-btn del" data-del-char="${c.id}">🗑</button>
+      </div>`).join('')}
+    </div>
+    <div class="sep"></div>
+    <div>
+      <div class="flex items-center justify-between mb-2">
+        <h3 style="font-size:1rem;color:var(--gold)">🎬 Épisodes</h3>
+        <button class="btn btn-primary btn-sm" id="btn-new-ep">+ Créer</button>
+      </div>
+      ${p.episodes.length===0?'<p class="text-muted text-sm">Aucun épisode.</p>':p.episodes.map((e,i)=>`
+      <div class="ep-card" data-open-ep="${e.id}">
+        <div class="ep-num">${i+1}</div>
+        <div class="ep-info">
+          <div class="ep-title">${e.title||`Épisode ${i+1}`}</div>
+          <div class="ep-status">${e.videoUrl?'✅ Vidéo':e.audioUrl?'🎙 Audio':'✏️ Brouillon'}</div>
+        </div>
+        <span style="color:var(--text3)">›</span>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div class="modal-overlay hidden" id="modal-char" style="z-index:200">
+    <div class="modal">
+      <div class="modal-header"><h3>Nouveau personnage</h3><button class="modal-close" id="close-char">✕</button></div>
+      <div class="field-group"><label class="label">Nom</label><input class="input" id="char-name" placeholder="Kofi"></div>
+      <div class="field-group"><label class="label">Rôle</label>
+        <select class="select" id="char-role"><option value="Principal">Principal</option><option value="Secondaire">Secondaire</option></select>
+      </div>
+      <div class="field-group"><label class="label">Description (anglais pour les images)</label>
+        <textarea class="textarea" id="char-desc" placeholder="young african man, dark skin, short hair, white shirt" style="min-height:90px"></textarea>
+      </div>
+      <button class="btn btn-primary btn-full mt-2" id="confirm-char">Ajouter</button>
+    </div>
+  </div>`;
+}
+
+// ─── STUDIO ───
+function vStudio() {
+  const st=S.studio, ep=getEp(), proj=getProj();
+  const steps=[{n:1,l:'Script'},{n:2,l:'Voix'},{n:3,l:'Images'},{n:4,l:'Vidéo'}];
+  const stepsHtml=`<div class="steps">${steps.map((s,i)=>`
+    <div class="step-item">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+        <div class="step-circle ${st.step>s.n?'done':st.step===s.n?'active':'pending'}">${st.step>s.n?'✓':s.n}</div>
+        <span class="step-label">${s.l}</span>
+      </div>
+      ${i<3?`<div class="step-line ${st.step>s.n?'done':''}" style="margin-bottom:1.2rem"></div>`:''}
+    </div>`).join('')}</div>`;
+
+  let content='';
+
+  if(st.step===1) content=`
+    <div class="field-group"><label class="label">Titre</label><input class="input" id="ep-title" value="${st.title}" placeholder="La nuit du carrefour"></div>
+    <div class="field-group"><label class="label">Ton</label>
+      <div class="ton-selector">
+        <button class="ton-btn ${st.ton==='Mystérieux'?'active':''}" data-ton="Mystérieux">🌑 Mystérieux</button>
+        <button class="ton-btn ${st.ton==='Papa Conteur'?'active':''}" data-ton="Papa Conteur">🔥 Papa Conteur</button>
+      </div>
+    </div>
+    <div class="field-group"><label class="label">Script</label><textarea class="textarea" id="ep-script" style="min-height:200px" placeholder="Écris ton histoire ici...">${st.script}</textarea></div>
+    ${st.error?`<div class="alert alert-error"><span>⚠</span><span>${st.error}</span></div>`:''}
+    <button class="btn btn-gold btn-full mb-2" id="btn-enrich" ${st.busy?'disabled':''}>
+      ${st.busy?'<div class="spinner"></div> Enrichissement...':'✨ Enrichir avec l\'IA'}
+    </button>
+    <button class="btn btn-primary btn-full" id="btn-s1-next" ${st.script.trim()?'':'disabled'}>✅ Script prêt → Voix</button>`;
+
+  else if(st.step===2) content=`
+    <div class="card text-center mb-3">
+      <div style="font-size:2rem;margin-bottom:.5rem">🎙</div>
+      <h3 style="margin-bottom:.3rem">Génération de la Voix</h3>
+      <p class="text-muted text-sm">Voix française posée et mystérieuse</p>
+    </div>
+    ${st.error?`<div class="alert alert-error"><span>⚠</span><span>${st.error}</span></div>`:''}
+    ${st.audioUrl?`
+      <div class="audio-player">
+        <div class="flex items-center gap-1"><span style="color:var(--gold)">✅</span><span class="font-bold">Audio prêt</span>${st.audioDuration?`<span class="text-muted text-sm">${Math.round(st.audioDuration)}s</span>`:''}</div>
+        <audio controls src="${st.audioUrl}" id="audio-el"></audio>
+        <button class="btn btn-ghost btn-sm" id="btn-regen-audio">↺ Regénérer</button>
+      </div>`:`
+      <button class="btn btn-primary btn-full mb-3" id="btn-gen-audio" ${st.busy?'disabled':''}>
+        ${st.busy?'<div class="spinner"></div> Génération...':'🎙 Générer la voix'}
+      </button>`}
+    <div class="flex gap-2">
+      <button class="btn btn-ghost flex-1" id="btn-s2-back">← Retour</button>
+      <button class="btn btn-primary flex-1" id="btn-s2-next" ${st.audioUrl?'':'disabled'}>✅ Voix → Images</button>
+    </div>`;
+
+  else if(st.step===3) {
+    const done=st.segments.filter(s=>s.status==='done').length;
+    const total=st.segments.length||toSegments(st.script).length;
+    content=`
+    <div class="alert alert-info">
+      <span>ℹ️</span>
+      <div style="font-size:.82rem;line-height:1.5">
+        <strong>Génération séquentielle</strong> — chaque image est vérifiée avant la suivante.
+        Comptez ~5–10s par image. Tu peux aussi importer depuis ta galerie 📁
+      </div>
+    </div>
+    <div class="img-counter-bar">
+      <span id="img-counter" style="font-size:.9rem;color:var(--text2)">${done}/${total} images prêtes</span>
+      <button class="btn btn-primary btn-sm" id="btn-gen-imgs" ${st.busy?'disabled':''}>
+        ${st.busy?'<div class="spinner"></div>':'⚡'} ${st.busy?'En cours...':'Tout générer'}
+      </button>
+    </div>
+    ${st.busy?`
+      <div class="progress-bar mb-1"><div class="progress-fill" id="img-pbar" style="width:${done/Math.max(total,1)*100}%"></div></div>
+      <p class="text-center text-sm text-muted mb-2" id="img-prog-txt">Initialisation...</p>`:''}
+    <div class="images-grid" id="imgs-grid">
+      ${(st.segments.length>0?st.segments:Array(total).fill(null)).map((seg,i)=>
+        seg?`<div class="img-slot ${seg.status}" id="slot-${i}">
+          ${seg.status==='done'&&seg.imgUrl?`
+            <img src="${seg.imgUrl}" alt="">
+            <div class="img-slot-overlay">
+              <button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺ Régénérer</button>
+              <label class="btn btn-brown btn-sm" style="cursor:pointer">📁 Galerie<input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)"></label>
+            </div>`
+          :seg.status==='loading'?`<div class="img-slot-body"><div class="spinner"></div><span class="img-slot-label attempt-badge">Génération...</span></div>`
+          :seg.status==='error'?`<div class="img-slot-body"><span style="font-size:1.5rem">❌</span><span class="img-slot-label">Échec</span><button class="btn btn-primary btn-sm" onclick="regenOne(${i})">↺ Retry</button><label class="btn btn-brown btn-sm" style="cursor:pointer;font-size:.75rem">📁 Importer<input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)"></label></div>`
+          :`<div class="img-slot-body" style="opacity:.3"><span class="img-slot-num">${i+1}</span><span class="img-slot-label">En attente</span></div>`}
+        </div>`
+        :`<div class="img-slot idle" id="slot-${i}"><div class="img-slot-body" style="opacity:.3"><span class="img-slot-num">${i+1}</span><span class="img-slot-label">En attente</span></div></div>`
+      ).join('')}
+    </div>
+    <div class="flex gap-2 mt-3">
+      <button class="btn btn-ghost flex-1" id="btn-s3-back">← Retour</button>
+      <button class="btn btn-primary flex-1" id="btn-s3-next" ${done>0?'':'disabled'}>✅ Images → Montage</button>
+    </div>`;
+  }
+
+  else if(st.step===4) {
+    const readyUrls=st.segments.filter(s=>s.status==='done'&&s.imgUrl).map(s=>s.imgUrl);
+    content=`
+    ${st.error?`<div class="alert alert-error"><span>⚠</span><span>${st.error}</span></div>`:''}
+    <div class="card mb-3">
+      <h3 style="margin-bottom:1rem;color:var(--gold)">🎬 Montage Final</h3>
+      <div class="flex gap-1 mb-2 text-sm text-muted">
+        <span>📸 ${readyUrls.length} images</span><span>•</span>
+        <span>🎙 ${st.audioDuration?Math.round(st.audioDuration)+'s':'Audio OK'}</span>
+      </div>
+      ${st.videoUrl?`
+        <div class="alert alert-success"><span>✅</span><span>Vidéo prête !</span></div>
+        <video src="${st.videoUrl}" controls style="width:100%;border-radius:var(--radius);margin-bottom:1rem;max-height:50vh"></video>
+        <a href="${st.videoUrl}" download="papa_conteur.webm" class="btn btn-primary btn-full mb-2">⬇️ Télécharger</a>
+        <button class="btn btn-ghost btn-full" id="btn-regen-vid">↺ Regénérer vidéo</button>`:`
+        ${st.busy?`<div class="progress-bar mb-2"><div class="progress-fill" id="vid-bar" style="width:0%"></div></div>
+        <p class="text-center text-sm text-muted mb-2" id="vid-txt">...</p>`:''}
+        <button class="btn btn-primary btn-full mb-2" id="btn-gen-vid" ${st.busy?'disabled':''}>
+          ${st.busy?'<div class="spinner"></div> Montage...':'🎬 Créer la vidéo'}
+        </button>`}
+      <div class="sep"></div>
+      <button class="btn btn-brown btn-full" id="btn-zip">📦 Exporter ZIP (images + audio)</button>
+    </div>
+    <div class="flex gap-2">
+      <button class="btn btn-ghost flex-1" id="btn-s4-back">← Retour</button>
+      <button class="btn btn-gold flex-1" id="btn-new-ep-2">🔄 Nouvel épisode</button>
+    </div>`;
+  }
+
+  return `
+  <div class="header">
+    <button class="header-back" id="btn-back-proj">←</button>
+    <div class="header-title">${ep?.title||'Nouvel épisode'}<div class="header-sub">${proj?.name||''}</div></div>
+  </div>
+  <div class="studio-content">${stepsHtml}${content}</div>`;
+}
+
+// ═══════════════════════════════════════
+// EVENTS
+// ═══════════════════════════════════════
+function on(id,ev,fn){ const el=$(id); if(el) el.addEventListener(ev,fn); }
+const show = id=>{ const e=$(id); if(e) e.classList.remove('hidden'); };
+const hide = id=>{ const e=$(id); if(e) e.classList.add('hidden'); };
+
+function attachEvents() {
+  // HOME
+  on('btn-save-key','click',()=>{
+    const k=$('gkey')?.value?.trim();
+    if(!k?.startsWith('AIza')){alert('La clé doit commencer par AIza...');return;}
+    localStorage.setItem('pc_gemini_key',k);
+    alert('✅ Clé sauvegardée !'); render();
+  });
+  on('btn-new-proj','click',()=>show('modal-proj'));
+  on('close-proj','click',()=>hide('modal-proj'));
+  on('confirm-proj','click',createProj);
+  document.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();openProj(el.dataset.open);}));
+  document.querySelectorAll('[data-del]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();delProj(el.dataset.del);}));
+
+  // PROJECT
+  on('btn-home','click',()=>{ S.view='home'; render(); });
+  on('btn-add-char','click',()=>show('modal-char'));
+  on('close-char','click',()=>hide('modal-char'));
+  on('confirm-char','click',addChar);
+  on('btn-new-ep','click',createEp);
+  document.querySelectorAll('[data-open-ep]').forEach(el=>el.addEventListener('click',()=>openEp(el.dataset.openEp)));
+  document.querySelectorAll('[data-del-char]').forEach(el=>el.addEventListener('click',()=>delChar(el.dataset.delChar)));
+
+  // STUDIO
+  document.querySelectorAll('.ton-btn').forEach(b=>b.addEventListener('click',()=>{ S.studio.ton=b.dataset.ton; render(); }));
+  on('ep-title','input',e=>{ S.studio.title=e.target.value; });
+  on('ep-script','input',e=>{ S.studio.script=e.target.value; const btn=$('btn-s1-next'); if(btn) btn.disabled=!e.target.value.trim(); });
+
+  on('btn-enrich','click',async()=>{
+    const sc=$('ep-script')?.value?.trim()||S.studio.script;
+    if(!sc) return;
+    S.studio.script=sc; S.studio.busy=true; S.studio.error=null; render();
+    try{ S.studio.script=await enrichScript(sc,S.studio.ton,getProj()?.characters||[]); }
+    catch(e){ S.studio.error=e.message; }
+    S.studio.busy=false; render();
+  });
+
+  on('btn-s1-next','click',()=>{
+    S.studio.title=$('ep-title')?.value||S.studio.title;
+    S.studio.script=$('ep-script')?.value||S.studio.script;
+    patchEp({title:S.studio.title,script:S.studio.script});
+    S.studio.step=2; S.studio.error=null; render();
+  });
+
+  on('btn-gen-audio','click',async()=>{
+    S.studio.busy=true; S.studio.error=null; render();
+    try{
+      const blob=await generateAudio();
+      const url=URL.createObjectURL(blob);
+      S.studio.audioBlob=blob; S.studio.audioUrl=url;
+      patchEp({audioUrl:url});
+    }catch(e){ S.studio.error='Audio: '+e.message; }
+    S.studio.busy=false; render();
+    setTimeout(()=>{ const a=$('audio-el'); if(a) a.onloadedmetadata=()=>{ S.studio.audioDuration=a.duration; }; },100);
+  });
+  on('btn-regen-audio','click',()=>{ S.studio.audioUrl=null; S.studio.audioBlob=null; render(); });
+  on('btn-s2-back','click',()=>{ S.studio.step=1; render(); });
+  on('btn-s2-next','click',()=>{
+    const a=$('audio-el'); if(a) S.studio.audioDuration=a.duration||0;
+    // Init segments
+    if(S.studio.segments.length===0){
+      const segs=toSegments(S.studio.script);
+      S.studio.segments=segs.map(text=>({text,prompt:'',imgUrl:'',status:'idle'}));
+    }
+    S.studio.step=3; S.studio.error=null; render();
+  });
+
+  on('btn-gen-imgs','click',doGenerateImages);
+  on('btn-s3-back','click',()=>{ S.studio.step=2; render(); });
+  on('btn-s3-next','click',()=>{ S.studio.step=4; S.studio.error=null; render(); });
+
+  on('btn-gen-vid','click',async()=>{
+    const urls=S.studio.segments.filter(s=>s.status==='done'&&s.imgUrl).map(s=>s.imgUrl);
+    if(!urls.length){alert('Aucune image prête');return;}
+    if(!S.studio.audioBlob){alert('Aucun audio');return;}
+    S.studio.busy=true; S.studio.error=null; render();
+    try{
+      const blob=await generateVideo(urls,S.studio.audioBlob,(pct,msg)=>{
+        const b=$('vid-bar'),t=$('vid-txt');
+        if(b) b.style.width=pct+'%'; if(t) t.textContent=msg;
+      });
+      S.studio.videoBlob=blob;
+      S.studio.videoUrl=URL.createObjectURL(blob);
+      patchEp({videoUrl:S.studio.videoUrl});
+    }catch(e){ S.studio.error='Vidéo: '+e.message; }
+    S.studio.busy=false; render();
+  });
+  on('btn-regen-vid','click',()=>{ S.studio.videoUrl=null; S.studio.videoBlob=null; render(); });
+  on('btn-s4-back','click',()=>{ S.studio.step=3; render(); });
+  on('btn-new-ep-2','click',()=>{ S.view='project'; S.epId=null; S.studio=freshStudio(); render(); });
+  on('btn-back-proj','click',()=>{ S.view='project'; S.epId=null; render(); });
+
+  on('btn-zip','click',async()=>{
+    try{
+      const zip=new JSZip(); const folder=zip.folder('papa_conteur');
+      await Promise.all(S.studio.segments.filter(s=>s.imgUrl).map(async(s,i)=>{
+        try{ const r=await fetch(s.imgUrl); folder.file(`${String(i+1).padStart(2,'0')}.jpg`,await r.blob()); }catch(e){}
+      }));
+      if(S.studio.audioBlob) folder.file('voix.wav',S.studio.audioBlob);
+      folder.file('notice.txt','Importe les images dans CapCut dans l\'ordre.\nAjoute voix.wav sur la piste audio.\nExporte en 1080x1920.');
+      const blob=await zip.generateAsync({type:'blob'});
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+      a.download=`papa_conteur_${S.studio.title||'ep'}.zip`; a.click();
+    }catch(e){ alert('ZIP: '+e.message); }
+  });
+}
+
+// ═══════════════════════════════════════
+// ACTIONS
+// ═══════════════════════════════════════
+function createProj() {
+  const name=$('proj-name')?.value?.trim();
+  if(!name){alert('Donne un nom');return;}
+  const p={id:uid(),name,characters:[],episodes:[],seed:Math.floor(10000+Math.random()*90000),createdAt:new Date().toISOString()};
+  S.projects.unshift(p); saveState();
+  S.projId=p.id; S.view='project'; render();
+}
+function delProj(id){
+  if(!confirm('Supprimer cette série ?')) return;
+  S.projects=S.projects.filter(p=>p.id!==id); saveState(); render();
+}
+function openProj(id){ S.projId=id; S.view='project'; render(); }
+
+function addChar(){
+  const name=$('char-name')?.value?.trim();
+  const desc=$('char-desc')?.value?.trim();
+  if(!name||!desc){alert('Remplis nom et description');return;}
+  const p=getProj(); if(!p) return;
+  p.characters.push({id:uid(),name,role:$('char-role')?.value||'Principal',description:desc});
+  saveState(); hide('modal-char'); render();
+}
+function delChar(id){
+  const p=getProj(); if(!p) return;
+  p.characters=p.characters.filter(c=>c.id!==id); saveState(); render();
+}
+
+function createEp(){
+  const p=getProj(); if(!p) return;
+  const ep={id:uid(),title:`Épisode ${p.episodes.length+1}`,script:'',audioUrl:null,images:[],videoUrl:null,createdAt:new Date().toISOString()};
+  p.episodes.push(ep); saveState(); openEp(ep.id);
+}
+
+function openEp(id){
+  S.epId=id;
+  const ep=getEp(); if(!ep) return;
+  S.studio=freshStudio();
+  S.studio.title=ep.title||'';
+  S.studio.script=ep.script||'';
+  if(ep.audioUrl) S.studio.audioUrl=ep.audioUrl;
+  if(ep.images?.length>0){
+    S.studio.segments=ep.images.map(img=>({text:img.text||'',prompt:'',imgUrl:img.url||'',status:img.url?'done':'idle'}));
+    S.studio.step=ep.videoUrl?4:ep.audioUrl?3:ep.images.length>0?3:1;
+  }
+  if(ep.videoUrl) S.studio.videoUrl=ep.videoUrl;
+  S.view='studio'; render();
+}
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+loadState();
+render();
+</script>
+</body>
+</html>
