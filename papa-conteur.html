@@ -4,147 +4,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Papa Conteur — Studio TikTok</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
-:root{
-  --ink:#08060A;
-  --ink2:#110D16;
-  --ink3:#1C1524;
-  --ink4:#261C30;
-  --ember:#E8612A;
-  --ember2:#FF7A45;
-  --gold:#C8941A;
-  --gold2:#E8B840;
-  --smoke:#A898B8;
-  --smoke2:#7A6888;
-  --smoke3:#4A3858;
-  --parchment:#F5EDD8;
-  --parchment2:#C8B898;
-  --r:.9rem;
-  --r2:1.4rem;
-  --shadow:0 8px 32px rgba(0,0,0,.6);
-  --glow:0 0 40px rgba(232,97,42,.15);
-}
+:root{--bg:#0D0A08;--bg2:#1A1008;--bg3:#231508;--primary:#E85D26;--gold:#C4923A;--brown:#3D2314;--text:#FAF7F2;--text2:#C8A898;--text3:#886050;--r:1.2rem;--r2:2rem}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--parchment);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-#app{min-height:100vh;display:flex;flex-direction:column;animation:fadeIn .4s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+html,body{height:100%;font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+#app{min-height:100vh;display:flex;flex-direction:column}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.5rem;border:none;border-radius:var(--r);font-weight:700;font-size:.95rem;cursor:pointer;transition:all .2s}
+.btn-p{background:var(--primary);color:#fff;width:100%}.btn-p:hover{opacity:.9}
+.btn-g{background:var(--gold);color:#0D0A08;width:100%}.btn-g:hover{opacity:.9}
+.btn-b{background:var(--brown);color:var(--text)}.btn-b:hover{opacity:.9}
+.btn-o{background:transparent;border:2px solid var(--brown);color:var(--text2)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.card{background:var(--bg2);border:1px solid rgba(196,146,58,.15);border-radius:1.2rem;padding:1.5rem;margin-bottom:1rem}
+.input,.textarea{width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(196,146,58,.2);border-radius:var(--r);color:var(--text);padding:.85rem 1rem;font-size:1rem;outline:none;margin-bottom:.75rem}
+.input:focus,.textarea:focus{border-color:var(--gold)}
+.textarea{resize:vertical;min-height:150px;line-height:1.6}
+.label{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--text3);margin-bottom:.4rem;display:block}
+.tag{display:inline-block;padding:.25rem .75rem;border-radius:99px;font-size:.75rem;font-weight:700;margin:2px}
+.tag-g{background:rgba(196,146,58,.2);color:var(--gold)}
+.tag-p{background:rgba(232,93,38,.2);color:var(--primary)}
+.spin{width:24px;height:24px;border:3px solid rgba(255,255,255,.15);border-top-color:var(--primary);border-radius:50%;animation:sp .8s linear infinite;margin:0 auto}
 @keyframes sp{to{transform:rotate(360deg)}}
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.8rem 1.4rem;border:none;border-radius:var(--r);font-family:'DM Sans',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .2s;letter-spacing:.01em}
-.btn:active{transform:scale(.97)}
-.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
-.btn-primary{background:linear-gradient(135deg,var(--ember),var(--ember2));color:#fff;box-shadow:0 4px 16px rgba(232,97,42,.35);width:100%}
-.btn-primary:hover:not(:disabled){box-shadow:0 6px 24px rgba(232,97,42,.5);transform:translateY(-1px)}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--ink);box-shadow:0 4px 16px rgba(200,148,26,.3);width:100%}
-.btn-gold:hover:not(:disabled){box-shadow:0 6px 24px rgba(200,148,26,.45);transform:translateY(-1px)}
-.btn-ghost{background:transparent;border:1.5px solid var(--smoke3);color:var(--smoke)}
-.btn-ghost:hover:not(:disabled){border-color:var(--smoke2);color:var(--parchment2)}
-.btn-dark{background:var(--ink3);color:var(--parchment2);border:1px solid var(--smoke3)}
-.btn-danger{background:rgba(180,30,30,.2);border:1.5px solid rgba(180,30,30,.4);color:#ff8888}
-
-/* ── CARDS ── */
-.card{background:var(--ink2);border:1px solid rgba(200,148,26,.12);border-radius:var(--r2);padding:1.4rem;margin-bottom:.85rem;box-shadow:var(--shadow)}
-.card-glow{box-shadow:var(--shadow),var(--glow)}
-
-/* ── INPUTS ── */
-.input,.textarea{width:100%;background:rgba(255,255,255,.04);border:1.5px solid rgba(200,148,26,.15);border-radius:var(--r);color:var(--parchment);padding:.8rem 1rem;font-family:'DM Sans',sans-serif;font-size:.95rem;outline:none;margin-bottom:.75rem;transition:border-color .2s}
-.input:focus,.textarea:focus{border-color:rgba(200,148,26,.5);background:rgba(255,255,255,.06)}
-.textarea{resize:vertical;min-height:160px;line-height:1.65}
-.label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--smoke2);margin-bottom:.4rem;display:block}
-
-/* ── TAGS ── */
-.tag{display:inline-block;padding:.2rem .7rem;border-radius:99px;font-size:.72rem;font-weight:600;margin:2px;letter-spacing:.02em}
-.tag-g{background:rgba(200,148,26,.15);color:var(--gold2);border:1px solid rgba(200,148,26,.25)}
-.tag-p{background:rgba(232,97,42,.15);color:var(--ember2);border:1px solid rgba(232,97,42,.25)}
-
-/* ── SPINNER ── */
-.spin{width:22px;height:22px;border:2.5px solid rgba(255,255,255,.1);border-top-color:var(--ember);border-radius:50%;animation:sp .7s linear infinite;margin:0 auto;flex-shrink:0}
-
-/* ── PROGRESS BAR ── */
-.pbar{height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;margin:.75rem 0}
-.pfill{height:100%;background:linear-gradient(90deg,var(--ember),var(--gold2));border-radius:2px;transition:width .35s ease}
-
-/* ── ALERTS ── */
-.alert{padding:.9rem 1rem;border-radius:var(--r);font-size:.88rem;margin-bottom:.85rem;line-height:1.5}
-.ae{background:rgba(180,30,30,.12);border:1px solid rgba(180,30,30,.35);color:#ff9090}
-.as{background:rgba(30,120,60,.12);border:1px solid rgba(30,120,60,.35);color:#80dd99}
-.ai{background:rgba(200,148,26,.08);border:1px solid rgba(200,148,26,.25);color:var(--gold2)}
-
-/* ── IMAGE GRID ── */
-.igrid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1rem 0}
-.islot{aspect-ratio:9/16;background:var(--ink3);border:1.5px solid var(--smoke3);border-radius:var(--r);overflow:hidden;position:relative}
-.islot.done{border-color:rgba(200,148,26,.45)}
-.islot.err{border-color:rgba(180,30,30,.4)}
+.pbar{height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;margin:.75rem 0}
+.pfill{height:100%;background:linear-gradient(90deg,var(--primary),var(--gold));border-radius:3px;transition:width .4s}
+.hero{text-align:center;padding:3rem 1.5rem 2rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--gold);margin-bottom:.5rem}
+.hero p{color:var(--text2)}
+.alert{padding:1rem;border-radius:var(--r);font-size:.9rem;margin-bottom:1rem}
+.ae{background:rgba(139,26,26,.2);border:1px solid rgba(139,26,26,.5);color:#ff8080}
+.as{background:rgba(34,85,34,.2);border:1px solid rgba(34,85,34,.5);color:#80cc80}
+.ai{background:rgba(196,146,58,.1);border:1px solid rgba(196,146,58,.3);color:var(--gold)}
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1rem 0}
+.islot{aspect-ratio:9/16;background:var(--bg3);border:2px solid var(--brown);border-radius:var(--r);overflow:hidden;position:relative}
+.islot.done{border-color:rgba(196,146,58,.6)}
 .islot img{width:100%;height:100%;object-fit:cover}
-.islot .iover{position:absolute;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;gap:.5rem;opacity:0;transition:opacity .2s}
+.islot .iover{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;gap:.5rem;opacity:0;transition:opacity .2s}
 .islot:hover .iover{opacity:1}
 .islot .ibody{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
-
-/* ── AUDIO ── */
-audio{width:100%;height:34px;margin:.4rem 0;border-radius:var(--r);opacity:.9}
-
-/* ── UTILS ── */
-.hidden{display:none}.tc{text-align:center}.ts{font-size:.85rem}.tm{color:var(--smoke2)}
+audio{width:100%;height:36px;margin:.5rem 0}
+.hidden{display:none}.tc{text-align:center}.ts{font-size:.85rem}.tm{color:var(--text3)}
 .mt1{margin-top:.5rem}.mt2{margin-top:1rem}.mb1{margin-bottom:.5rem}.mb2{margin-bottom:1rem}
 .flex{display:flex}.g1{gap:.5rem}.g2{gap:1rem}.ic{align-items:center}.jb{justify-content:space-between}
-
-/* ── HERO ── */
-.hero{text-align:center;padding:3.5rem 1.5rem 2rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(232,97,42,.12),transparent);pointer-events:none}
-.hero-icon{font-size:3rem;display:block;margin-bottom:.75rem;filter:drop-shadow(0 0 20px rgba(232,97,42,.5))}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;background:linear-gradient(135deg,var(--gold2),var(--parchment),var(--ember2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:.4rem}
-.hero-sub{font-size:.85rem;color:var(--smoke2);letter-spacing:.05em;text-transform:uppercase;font-weight:500}
-
-/* ── NAV HEADER ── */
-.nav{background:rgba(8,6,10,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:.85rem 1.2rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(200,148,26,.1)}
-.nav-back{background:var(--ink3);border:1px solid var(--smoke3);color:var(--smoke);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
-.nav-back:hover{border-color:var(--smoke2);color:var(--parchment)}
-.nav-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--parchment)}
-.nav-sub{font-size:.72rem;color:var(--smoke2);margin-top:1px}
-
-/* ── STEPPER ── */
-.stepper{display:flex;align-items:center;margin-bottom:1.5rem}
-.step-node{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0}
-.step-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;transition:all .3s}
-.step-circle.done{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--ink)}
-.step-circle.active{background:linear-gradient(135deg,var(--ember),var(--ember2));color:#fff;box-shadow:0 0 16px rgba(232,97,42,.4)}
-.step-circle.idle{background:var(--ink3);color:var(--smoke3);border:1.5px solid var(--smoke3)}
-.step-label{font-size:.6rem;color:var(--smoke2);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.step-line{flex:1;height:2px;margin-bottom:1.2rem;transition:background .3s}
-.step-line.done{background:linear-gradient(90deg,var(--gold),var(--gold2))}
-.step-line.idle{background:var(--smoke3)}
-
-/* ── PROJECT CARD ── */
-.proj-card{background:var(--ink2);border:1px solid rgba(200,148,26,.1);border-radius:var(--r2);padding:1.1rem 1.2rem;display:flex;align-items:center;gap:1rem;margin-bottom:.6rem;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.3)}
-.proj-card:hover{border-color:rgba(200,148,26,.3);transform:translateX(3px)}
-.proj-avatar{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--ember),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--ink);flex-shrink:0}
-.proj-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;margin-bottom:3px}
-.proj-meta{font-size:.75rem;color:var(--smoke2)}
-
-/* ── CHAR CARD ── */
-.char-card{background:var(--ink3);border:1px solid rgba(74,56,88,.6);border-radius:var(--r);padding:.9rem 1rem;display:flex;align-items:center;gap:.9rem;margin-bottom:.5rem}
-.char-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--ember),var(--gold));display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:var(--ink);flex-shrink:0;font-family:'Cormorant Garamond',serif}
-
-/* ── EPISODE CARD ── */
-.ep-card{background:var(--ink3);border:1px solid rgba(74,56,88,.5);border-radius:var(--r);padding:.9rem 1rem;display:flex;align-items:center;gap:.9rem;cursor:pointer;margin-bottom:.5rem;transition:all .2s}
-.ep-card:hover{border-color:rgba(200,148,26,.3);background:var(--ink4)}
-.ep-num{width:38px;height:38px;border-radius:50%;background:var(--ink4);border:1.5px solid var(--smoke3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
-
-/* ── TON / MODEL BUTTONS ── */
-.choice-btn{flex:1;padding:.7rem .5rem;border-radius:var(--r);border:1.5px solid var(--smoke3);background:transparent;color:var(--smoke);font-family:'DM Sans',sans-serif;font-weight:600;font-size:.85rem;cursor:pointer;transition:all .2s;text-align:center}
-.choice-btn.active{background:rgba(232,97,42,.15);border-color:var(--ember);color:var(--ember2)}
-
-/* ── DIVIDER ── */
-.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(200,148,26,.15),transparent);margin:1.2rem 0}
-
-/* ── VIDEO ── */
-video{width:100%;border-radius:var(--r2);margin-bottom:1rem;max-height:55vh;background:#000}
 </style>
 </head>
 <body>
@@ -152,25 +54,24 @@ video{width:100%;border-radius:var(--r2);margin-bottom:1rem;max-height:55vh;back
 <script>
 'use strict';
 // ═══════════════════════════════════════
-// PAPA CONTEUR v6 — PRODUCTION
+// PAPA CONTEUR — AUTO PERSONNAGES
 // ═══════════════════════════════════════
 const $=id=>document.getElementById(id);
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2);
-
-// ─── CLÉS API (intégrées) ───────────────
-const GEMINI_KEY='AIzaSyBGGvKMks5e7hIJU1aYvzAotJBX-wAZlms';
-const CF_ACCOUNT_ID='e01ca7d1c8d03c8f3738c0318a136772';
-const CF_TOKEN='cfut_GVXdjTSTQMJsZRfVHkJXtxb7FmukekmimFmwiJTv4de68487';
-// ────────────────────────────────────────
+const getGeminiKey=()=>localStorage.getItem('pc_key')||'';
+const getCFToken=()=>localStorage.getItem('pc_cf_token')||'';
+const getCFAccountId=()=>localStorage.getItem('pc_cf_account')||'';
 
 let S={view:'home',projects:[],projId:null,epId:null,studio:fresh()};
 
 function fresh(){
   return{step:1,title:'',script:'',ton:'Mystérieux',imgModel:'schnell',audioBlob:null,audioUrl:null,audioDur:0,segs:[],vidUrl:null,vidBlob:null,busy:false,err:null,silenceSegments:[]};
 }
-function load(){try{const d=JSON.parse(localStorage.getItem('pc_v6')||'{}');S.projects=d.p||[];}catch(e){S.projects=[];}}
-function save(){try{localStorage.setItem('pc_v6',JSON.stringify({p:S.projects}));}catch(e){}}
+
+function load(){try{const d=JSON.parse(localStorage.getItem('pc_cf2')||'{}');S.projects=d.p||[];}catch(e){S.projects=[];}}
+function save(){try{localStorage.setItem('pc_cf2',JSON.stringify({p:S.projects}));}catch(e){}}
+
 const proj=()=>S.projects.find(p=>p.id===S.projId);
 const ep=()=>{const p=proj();return p?p.episodes.find(e=>e.id===S.epId):null;};
 function patchEp(d){const p=proj();if(!p)return;const i=p.episodes.findIndex(e=>e.id===S.epId);if(i>=0){p.episodes[i]={...p.episodes[i],...d};save();}}
@@ -184,15 +85,16 @@ function mkSegs(script){
   while(parts.length<4)parts=[...parts,...parts];
   return parts.slice(0,6);
 }
+
 function cleanTTS(t){return t.replace(/\[.*?\]/g,' ').replace(/\*+/g,'').replace(/\s{2,}/g,' ').trim();}
 function chunk(t,max){const out=[];let cur=t.trim();while(cur.length>0){if(cur.length<=max){out.push(cur);break;}let i=cur.lastIndexOf(' ',max);if(i<0)i=max;out.push(cur.slice(0,i).trim());cur=cur.slice(i).trim();}return out.filter(c=>c.length>0);}
 
-// ─── GEMINI ───────────────────────────
+// ═══════════ GEMINI ═══════════
 const MODELS=['gemini-2.5-flash','gemini-1.5-flash','gemini-1.5-flash-8b'];
-async function callModel(model,prompt){
+async function callModel(model,prompt,key){
   const ctrl=new AbortController();const t=setTimeout(()=>ctrl.abort(),25000);
   try{
-    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.75,maxOutputTokens:2048}})});
+    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,{method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.75,maxOutputTokens:2048}})});
     clearTimeout(t);
     const d=await r.json();
     if(!r.ok){const code=r.status;if(code===503||code===429||code===500)throw new Error('RETRY:'+code);throw new Error('Gemini '+code);}
@@ -200,13 +102,36 @@ async function callModel(model,prompt){
   }catch(e){clearTimeout(t);if(e.name==='AbortError')throw new Error('RETRY:timeout');throw e;}
 }
 async function gemini(prompt){
-  for(const m of MODELS){try{return await callModel(m,prompt);}catch(e){if(e.message.startsWith('RETRY:')){await sleep(1500);continue;}throw e;}}
-  throw new Error('Gemini surchargé, réessaie dans quelques secondes');
+  const key=getGeminiKey();if(!key)throw new Error('Clé Gemini manquante');
+  for(const m of MODELS){try{return await callModel(m,prompt,key);}catch(e){if(e.message.startsWith('RETRY:')){await sleep(1500);continue;}throw e;}}
+  throw new Error('Gemini surchargé');
 }
-async function enrichScript(script,ton,chars){
-  const cl=chars.map(c=>`- ${c.name}(${c.role}): ${c.description}`).join('\n');
-  return await gemini(`Tu es un conteur africain mystérieux.\nEnrichis ce script TikTok:\n1. Première phrase = choc en <10 mots\n2. Ajoute [SILENCE][SUSPENSE][TAMBOUR][FORET][CHUCHOTE] sur lignes séparées\n3. Zéro markdown, texte pur, lignes vides entre paragraphes\n4. Chaque para finit en suspense\n5. Ton: ${ton==='Mystérieux'?'sombre terreur':'chaleureux mystère doux'}\n${cl?'Personnages:\n'+cl:''}\nSCRIPT:\n${script}\nUNIQUEMENT le script enrichi.`);
+
+// ═══════════ ENRICHISSEMENT + DÉTECTION PERSONNAGES ═══════════
+async function enrichAndDetectCharacters(script, ton, existingChars) {
+  // Étape 1 : Enrichir le script
+  const cl = existingChars.map(c => `- ${c.name}(${c.role}): ${c.description}`).join('\n');
+  const enriched = await gemini(`Tu es un conteur africain mystérieux.\nEnrichis ce script TikTok:\n1. Première phrase = choc en <10 mots\n2. Ajoute [SILENCE][SUSPENSE][TAMBOUR][FORET][CHUCHOTE] sur lignes séparées\n3. Zéro markdown, texte pur, lignes vides entre paragraphes\n4. Chaque para finit en suspense\n5. Ton: ${ton==='Mystérieux'?'sombre terreur':'chaleureux mystère doux'}\n${cl?'Personnages:\n'+cl:''}\nSCRIPT:\n${script}\nUNIQUEMENT le script enrichi.`);
+
+  // Étape 2 : Détecter les personnages
+  const charPrompt = `Analyse ce script et identifie TOUS les personnages qui apparaissent dans l'histoire.\n\nSCRIPT:\n${enriched}\n\nPour chaque personnage, fournis:\n- Nom (en français)\n- Rôle (Principal ou Secondaire)\n- Description physique en ANGLAIS (pour génération d'images) : apparence, âge, vêtements, traits distinctifs.\n\nRéponds UNIQUEMENT avec un objet JSON valide comme ceci:\n{\n  "characters": [\n    {"name": "Kofi", "role": "Principal", "description": "young african man, 22 years old, dark skin, short hair, white traditional shirt"},\n    {"name": "La mère", "role": "Secondaire", "description": "african woman, 50 years old, colorful pagne, worried face"}\n  ]\n}\n\nPas de texte avant ou après le JSON.`;
+  
+  let characters = [];
+  try {
+    const raw = await gemini(charPrompt);
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+    if (parsed.characters && Array.isArray(parsed.characters)) {
+      characters = parsed.characters;
+    }
+  } catch(e) {
+    console.warn('Détection personnages échouée, on garde ceux existants:', e);
+  }
+
+  return { enriched, characters };
 }
+
+// ═══════════ KEYWORDS ═══════════
 async function getKeywords(segs,chars,ton){
   const mc=chars.find(c=>c.role==='Principal')||chars[0];
   const cd=mc?mc.description.slice(0,80):'african person';
@@ -218,17 +143,21 @@ async function getKeywords(segs,chars,ton){
   return segs.map(()=>'mysterious african night, dramatic shadows, moonlight, cinematic');
 }
 
-// ─── IMAGES — CLOUDFLARE ──────────────
+// ═══════════ IMAGES — CLOUDFLARE ═══════════
 function getCFModel(imgModel){
   if(imgModel==='pro')return'@cf/stabilityai/stable-diffusion-xl-base-1.0';
   return'@cf/black-forest-labs/flux-1-schnell';
 }
+
 async function callCFImgAPI(prompt,imgModel){
+  const token=getCFToken();
+  const accountId=getCFAccountId();
+  if(!token||!accountId)throw new Error('Token Cloudflare manquant');
   const model=getCFModel(imgModel);
-  const url=`https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/run/${model}`;
+  const url=`https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/run/${model}`;
   const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),60000);
   try{
-    const resp=await fetch(url,{method:'POST',headers:{'Authorization':`Bearer ${CF_TOKEN}`,'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify({prompt:prompt.slice(0,500),num_steps:imgModel==='pro'?30:8,width:576,height:1024})});
+    const resp=await fetch(url,{method:'POST',headers:{'Authorization':`Bearer ${token}`,'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify({prompt:prompt.slice(0,500),num_steps:imgModel==='pro'?30:8,width:576,height:1024})});
     clearTimeout(timer);
     if(!resp.ok){const err=await resp.json().catch(()=>({}));throw new Error('CF '+resp.status+': '+(err.errors?.[0]?.message||'erreur'));}
     const blob=await resp.blob();
@@ -236,33 +165,37 @@ async function callCFImgAPI(prompt,imgModel){
     return URL.createObjectURL(blob);
   }catch(e){clearTimeout(timer);throw e;}
 }
+
 async function genImg(prompt,slotIdx,imgModel,maxTries=4){
   for(let a=0;a<maxTries;a++){
-    setBadge(slotIdx,`${a+1}/${maxTries}…`);
+    setBadge(slotIdx,`${a+1}/${maxTries} CF`);
+    console.log(`[img${slotIdx+1}] CF attempt ${a+1}`);
     try{
       const url=await callCFImgAPI(prompt,imgModel||'schnell');
-      if(url)return url;
+      if(url){console.log(`[img${slotIdx+1}] ✅ CF OK`);return url;}
     }catch(e){
-      console.warn(`[img${slotIdx+1}] CF:`,e.message);
+      console.warn(`[img${slotIdx+1}] CF failed:`,e.message);
       if(e.message.includes('quota')||e.message.includes('limit'))break;
       await sleep(3000);
     }
   }
   return null;
 }
+
 function setBadge(i,txt){const s=$(`slot-${i}`);if(!s)return;const b=s.querySelector('.ibadge');if(b)b.textContent=txt;}
+
 function drawSlot(i){
   const slot=$(`slot-${i}`);if(!slot)return;
   const seg=S.studio.segs[i];if(!seg)return;
   slot.className=`islot ${seg.status==='done'?'done':seg.status==='err'?'err':''}`;
   if(seg.status==='done'&&seg.url){
-    slot.innerHTML=`<img src="${seg.url}" alt=""><div class="iover"><button class="btn btn-dark" style="width:auto;padding:.45rem .9rem;font-size:.78rem" onclick="regenImg(${i})">↺</button><label class="btn btn-dark" style="width:auto;padding:.45rem .9rem;font-size:.78rem;cursor:pointer">📁<input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)"></label></div>`;
+    slot.innerHTML=`<img src="${seg.url}" alt=""><div class="iover"><button class="btn btn-p" style="width:auto;padding:.5rem 1rem;font-size:.8rem" onclick="regenImg(${i})">↺</button><label class="btn btn-b" style="width:auto;padding:.5rem 1rem;font-size:.8rem;cursor:pointer">📁<input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)"></label></div>`;
   }else if(seg.status==='loading'){
-    slot.innerHTML=`<div class="ibody"><div class="spin"></div><span class="ts tm ibadge" style="font-size:.7rem;margin-top:.3rem">Génération…</span></div>`;
+    slot.innerHTML=`<div class="ibody"><div class="spin"></div><span class="ts tm ibadge">CF Workers...</span></div>`;
   }else if(seg.status==='err'){
-    slot.innerHTML=`<div class="ibody"><span style="font-size:1.4rem">❌</span><button class="btn btn-primary" style="width:auto;padding:.4rem .9rem;font-size:.78rem;margin-top:.3rem" onclick="regenImg(${i})">↺ Retry</button></div>`;
+    slot.innerHTML=`<div class="ibody"><span style="font-size:1.5rem">❌</span><button class="btn btn-p" style="width:auto;padding:.5rem 1rem;font-size:.8rem" onclick="regenImg(${i})">↺ Retry</button></div>`;
   }else{
-    slot.innerHTML=`<div class="ibody" style="opacity:.2"><span style="font-size:2rem;font-family:'Cormorant Garamond',serif;color:var(--smoke3)">${i+1}</span></div>`;
+    slot.innerHTML=`<div class="ibody" style="opacity:.3"><span style="font-size:2rem;font-family:'Playfair Display',serif;color:var(--brown)">${i+1}</span></div>`;
   }
 }
 function updCtr(){
@@ -271,6 +204,7 @@ function updCtr(){
   if(c)c.textContent=`${done}/${tot} prêtes`;
   if(b)b.style.width=(done/Math.max(tot,1)*100)+'%';
 }
+
 async function doGenImgs(){
   if(S.studio.busy)return;S.studio.busy=true;S.studio.err=null;
   if(S.studio.segs.length===0)S.studio.segs=mkSegs(S.studio.script).map(text=>({text,prompt:'',url:'',status:'idle'}));
@@ -309,7 +243,7 @@ window.importImg=function(i,input){
   drawSlot(i);updCtr();
 };
 
-// ─── AUDIO ────────────────────────────
+// ═══════════ AUDIO ═══════════
 async function genAudio(){
   const clean=cleanTTS(S.studio.script);if(!clean)throw new Error('Script vide');
   try{return await ttsProxy(clean);}catch(e){return await ttsWS(clean);}
@@ -359,7 +293,7 @@ function silWav(sr,n){
   ws(36,'data');v.setUint32(40,ds,true);return new Blob([ab],{type:'audio/wav'});
 }
 
-// ─── DÉTECTION SILENCES ───────────────
+// ═══════════ DÉTECTION DE SILENCES ═══════════
 function detectSilenceSegments(audioBuffer,options={}){
   const{threshold=0.02,minSilenceDuration=0.4,minSegmentDuration=0.5,frameSize=1024}=options;
   const sampleRate=audioBuffer.sampleRate,totalSamples=audioBuffer.length;
@@ -399,10 +333,10 @@ function detectSilenceSegments(audioBuffer,options={}){
   return segments;
 }
 
-// ─── VIDÉO ────────────────────────────
+// ═══════════ VIDÉO ═══════════
 async function genVideo(imgUrls,audioBlob,onProg){
   const W=576,H=1024;
-  onProg(5,'Chargement images…');
+  onProg(5,'Chargement images...');
   const imgs=await Promise.all(imgUrls.map(url=>new Promise(res=>{
     if(!url){res(null);return;}
     const img=new Image();img.crossOrigin='anonymous';
@@ -412,21 +346,26 @@ async function genVideo(imgUrls,audioBlob,onProg){
   })));
   const valid=imgs.filter(Boolean);
   if(!valid.length)throw new Error('Aucune image valide');
-  onProg(10,`${valid.length} images chargées`);
+  onProg(10,`${valid.length} images`);
+
   const audioCtx=new(window.AudioContext||window.webkitAudioContext)();
   let decoded=null;
   try{decoded=await audioCtx.decodeAudioData(await audioBlob.arrayBuffer());}catch(e){console.warn('audio decode',e);}
   const audioDur=decoded?decoded.duration:valid.length*7;
+
+  // Détection des silences
   let segments=[];
   if(decoded){
     segments=detectSilenceSegments(decoded,{threshold:0.02,minSilenceDuration:0.4,minSegmentDuration:0.5});
+    console.log('[Silence] Segments détectés:',segments);
   }
   if(segments.length<valid.length){
     segments=[];
     const perImg=audioDur/valid.length;
     for(let i=0;i<valid.length;i++)segments.push({start:i*perImg,end:(i+1)*perImg});
   }
-  onProg(20,'Montage en cours…');
+
+  onProg(20,'Montage...');
   const cv=document.createElement('canvas');cv.width=W;cv.height=H;const ctx=cv.getContext('2d');
   const dest=audioCtx.createMediaStreamDestination();
   if(decoded){
@@ -438,20 +377,26 @@ async function genVideo(imgUrls,audioBlob,onProg){
   const mime=mimes.find(m=>MediaRecorder.isTypeSupported(m))||'';
   const rec=new MediaRecorder(vStream,mime?{mimeType:mime,videoBitsPerSecond:3000000}:{});
   const chunks=[];rec.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
+
   const kbDirs=[
     {sx:1.0,ex:1.12,ox:0,oy:0},{sx:1.12,ex:1.0,ox:0,oy:0},{sx:1.0,ex:1.12,ox:-20,oy:-15},
     {sx:1.0,ex:1.12,ox:20,oy:-10},{sx:1.08,ex:1.0,ox:15,oy:20},{sx:1.0,ex:1.10,ox:-10,oy:15}
   ];
+
   rec.start(100);
   return new Promise((resolve,reject)=>{
     rec.onstop=()=>resolve(new Blob(chunks,{type:mime||'video/webm'}));
     rec.onerror=reject;
     const t0=performance.now();
+
     function draw(){
       const elapsed=performance.now()-t0;
       if(elapsed>=audioDur*1000+500){rec.stop();audioCtx.close();onProg(100,'✅ Vidéo prête!');return;}
+
       let imgIdx=0;
-      for(let i=segments.length-1;i>=0;i--){if(elapsed/1000>=segments[i].start){imgIdx=i;break;}}
+      for(let i=segments.length-1;i>=0;i--){
+        if(elapsed/1000>=segments[i].start){imgIdx=i;break;}
+      }
       imgIdx=Math.min(imgIdx,valid.length-1);
       const seg=segments[imgIdx];
       const dur=(seg.end-seg.start)*1000;
@@ -460,11 +405,12 @@ async function genVideo(imgUrls,audioBlob,onProg){
       const kb=kbDirs[imgIdx%kbDirs.length];
       const scale=kb.sx+(kb.ex-kb.sx)*prog;
       const ox=kb.ox*prog,oy=kb.oy*prog;
+
       ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
       if(img){ctx.save();ctx.translate(W/2+ox,H/2+oy);ctx.scale(scale,scale);ctx.drawImage(img,-W/2,-H/2,W,H);ctx.restore();}
-      const g=ctx.createLinearGradient(0,H*0.6,0,H);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.75)');
+      const g=ctx.createLinearGradient(0,H*0.6,0,H);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.7)');
       ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-      ctx.fillStyle='rgba(232,184,64,.5)';ctx.font='bold 12px DM Sans';ctx.textAlign='right';ctx.fillText('Papa Conteur',W-14,22);
+      ctx.fillStyle='rgba(255,255,255,.18)';ctx.font='bold 13px Barlow';ctx.textAlign='right';ctx.fillText('Papa Conteur',W-14,14);
       const pct=Math.min(elapsed/(audioDur*1000),1);
       onProg(20+Math.floor(pct*78),`Montage: ${Math.floor(pct*100)}%`);
       requestAnimationFrame(draw);
@@ -473,236 +419,89 @@ async function genVideo(imgUrls,audioBlob,onProg){
   });
 }
 
-// ─── RENDER ───────────────────────────
+// ═══════════ RENDER ═══════════
 const render=()=>{$('app').innerHTML=buildView();bindEvents();};
 function buildView(){switch(S.view){case'home':return vHome();case'project':return vProject();case'studio':return vStudio();default:return vHome();}}
 
-// ─── VUE HOME ─────────────────────────
 function vHome(){
-  const hasProjets=S.projects.length>0;
-  return`
-  <div class="hero">
-    <span class="hero-icon">🪘</span>
-    <h1>Papa Conteur</h1>
-    <p class="hero-sub">Studio TikTok · Histoires africaines</p>
-  </div>
-  <div style="padding:0 1.2rem 2rem">
-    <button class="btn btn-primary mb2" id="b-newproj">
-      <span style="font-size:1rem">✦</span> Nouvelle série
-    </button>
-    ${hasProjets?`
-    <div class="label" style="margin-bottom:.6rem">Mes séries</div>
-    ${S.projects.map(p=>`
-    <div class="proj-card" data-open="${p.id}">
-      <div class="proj-avatar">${p.name[0].toUpperCase()}</div>
-      <div style="flex:1">
-        <div class="proj-name">${p.name}</div>
-        <div class="proj-meta">
-          <span class="tag tag-g">👤 ${p.characters.length} perso</span>
-          <span class="tag tag-p">🎬 ${p.episodes.length} épisodes</span>
-        </div>
-      </div>
-      <button data-del="${p.id}" style="background:rgba(180,30,30,.15);border:1px solid rgba(180,30,30,.3);color:#ff8888;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:.85rem;flex-shrink:0">✕</button>
-    </div>`).join('')}`:`
-    <div style="text-align:center;padding:2.5rem 0;color:var(--smoke2)">
-      <div style="font-size:2.5rem;margin-bottom:.75rem;opacity:.4">📚</div>
-      <div style="font-size:.9rem">Aucune série pour l'instant</div>
-      <div style="font-size:.8rem;margin-top:.3rem;opacity:.7">Crée ta première série ci-dessus</div>
-    </div>`}
+  const gk=getGeminiKey(),cfk=getCFToken(),cfa=getCFAccountId();
+  return`<div class="hero"><span style="font-size:3rem">🪘</span><h1>Papa Conteur</h1><p class="tm">Studio TikTok — Histoires africaines</p></div>
+  <div style="padding:1.5rem">
+    <div class="card"><div class="label">🔑 Clé Gemini</div><div class="flex g1"><input id="gkey" class="input" type="text" placeholder="AIza..." value="${gk}" style="flex:1;font-family:monospace"><button class="btn btn-g" id="b-savegemini" style="width:auto">💾</button></div></div>
+    <div class="card"><div class="label">☁️ Token Cloudflare</div><div class="flex g1"><input id="cftoken" class="input" type="text" placeholder="cfut_..." value="${cfk}" style="flex:1;font-family:monospace"><button class="btn btn-g" id="b-savecftoken" style="width:auto">💾</button></div></div>
+    <div class="card"><div class="label">🆔 Account ID Cloudflare</div><div class="flex g1"><input id="cfaccount" class="input" type="text" placeholder="abc123..." value="${cfa}" style="flex:1;font-family:monospace"><button class="btn btn-g" id="b-savecfaccount" style="width:auto">💾</button></div><p class="ts tm mt1">Trouvable dans l'URL du dashboard Cloudflare</p></div>
+    <button class="btn btn-p mt2" id="b-newproj">✦ Nouvelle série</button>
+    ${S.projects.length===0?'<p class="tc tm mt2">Aucune série</p>':S.projects.map(p=>`<div class="card mt1"><div style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:.5rem">${p.name}</div><div class="mb1"><span class="tag tag-g">👤 ${p.characters.length}</span> <span class="tag tag-p">🎬 ${p.episodes.length}</span></div><div class="flex g1"><button class="btn btn-g" style="flex:1" data-open="${p.id}">Ouvrir</button><button class="btn" style="background:#8B1A1A;color:#fff;flex:1" data-del="${p.id}">✕</button></div></div>`).join('')}
   </div>`;
 }
 
-// ─── VUE PROJECT ──────────────────────
 function vProject(){
   const p=proj();if(!p){S.view='home';return vHome();}
-  return`
-  <div class="nav">
-    <button class="nav-back" id="b-home">←</button>
-    <div>
-      <div class="nav-title">${p.name}</div>
-      <div class="nav-sub">Seed #${p.seed}</div>
-    </div>
-  </div>
-  <div style="padding:1.2rem">
-    <div class="flex jb ic mb1">
-      <span style="font-weight:700;color:var(--gold2);font-size:.9rem">👤 Personnages</span>
-      <button class="btn btn-dark" id="b-addchar" style="padding:.4rem .9rem;font-size:.8rem">+ Ajouter</button>
-    </div>
-    ${p.characters.length===0?`<div class="card" style="text-align:center;padding:1.2rem;color:var(--smoke2);font-size:.85rem">Aucun personnage</div>`:''}
-    ${p.characters.map(c=>`
-    <div class="char-card">
-      <div class="char-avatar">${c.name[0]}</div>
-      <div style="flex:1">
-        <div style="font-weight:600;font-size:.9rem">${c.name} <span class="tag tag-${c.role==='Principal'?'p':'g'}" style="font-size:.62rem">${c.role}</span></div>
-        <div class="ts tm" style="margin-top:2px">${c.description}</div>
-      </div>
-      <button data-dc="${c.id}" style="background:rgba(180,30,30,.12);border:1px solid rgba(180,30,30,.25);color:#ff9999;width:28px;height:28px;border-radius:7px;cursor:pointer;font-size:.8rem;flex-shrink:0">🗑</button>
-    </div>`).join('')}
-    <div class="divider"></div>
-    <div class="flex jb ic mb1">
-      <span style="font-weight:700;color:var(--gold2);font-size:.9rem">🎬 Épisodes</span>
-      <button class="btn btn-primary" id="b-newep" style="padding:.4rem .9rem;font-size:.8rem;width:auto">+ Nouveau</button>
-    </div>
-    ${p.episodes.length===0?`<div class="card" style="text-align:center;padding:1.2rem;color:var(--smoke2);font-size:.85rem">Aucun épisode</div>`:''}
-    ${p.episodes.map((e,i)=>`
-    <div class="ep-card" data-oe="${e.id}">
-      <div class="ep-num">${i+1}</div>
-      <div style="flex:1">
-        <div style="font-weight:600;font-size:.9rem">${e.title||'Épisode '+(i+1)}</div>
-        <div class="ts tm">${e.videoUrl?'✅ Vidéo prête':e.audioUrl?'🎙 Audio OK':'✏️ Brouillon'}</div>
-      </div>
-      <span style="color:var(--smoke3);font-size:1rem">›</span>
-    </div>`).join('')}
+  return`<div style="background:var(--bg2);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;border-bottom:1px solid rgba(196,146,58,.15)"><button id="b-home" style="background:var(--brown);border:none;color:var(--text2);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.1rem">←</button><div><span style="font-family:'Playfair Display',serif;font-size:1.1rem">${p.name}</span><div class="ts tm">Seed: ${p.seed}</div></div></div>
+  <div style="padding:1.5rem">
+    <div class="flex jb ic mb1"><span style="font-weight:700;color:var(--gold)">👤 Personnages (auto-détectés)</span></div>
+    ${p.characters.map(c=>`<div style="background:var(--bg3);border:1px solid rgba(61,35,20,.7);border-radius:.8rem;padding:1rem;display:flex;align-items:center;gap:1rem;margin-bottom:.5rem"><div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--gold));display:flex;align-items:center;justify-content:center;font-size:1.2rem">${c.name[0]}</div><div style="flex:1"><div style="font-weight:700">${c.name} <span class="tag tag-${c.role==='Principal'?'p':'g'}" style="font-size:.65rem">${c.role}</span></div><div class="ts tm">${c.description}</div></div></div>`).join('')}
+    <div style="height:1px;background:rgba(196,146,58,.1);margin:1.5rem 0"></div>
+    <div class="flex jb ic mb1"><span style="font-weight:700;color:var(--gold)">🎬 Épisodes</span><button class="btn btn-p" id="b-newep" style="padding:.5rem 1rem;font-size:.8rem">+</button></div>
+    ${p.episodes.map((e,i)=>`<div style="background:var(--bg3);border:1px solid rgba(61,35,20,.5);border-radius:.8rem;padding:1rem;display:flex;align-items:center;gap:1rem;cursor:pointer;margin-bottom:.5rem" data-oe="${e.id}"><div style="width:40px;height:40px;border-radius:50%;background:var(--brown);display:flex;align-items:center;justify-content:center;font-weight:700">${i+1}</div><div style="flex:1"><div style="font-weight:700">${e.title||'Épisode '+(i+1)}</div><div class="ts tm">${e.videoUrl?'✅ Vidéo':e.audioUrl?'🎙 Audio':'✏️ Brouillon'}</div></div></div>`).join('')}
   </div>`;
 }
 
-// ─── VUE STUDIO ───────────────────────
 function vStudio(){
   const st=S.studio,e=ep(),p=proj();
   const steps=[{n:1,l:'Script'},{n:2,l:'Voix'},{n:3,l:'Images'},{n:4,l:'Vidéo'}];
   let body='';
-
-  if(st.step===1){
-    body=`
-    <div class="label">Titre de l'épisode</div>
-    <input class="input" id="f-etitle" value="${st.title}" placeholder="Ex: La Forêt Interdite">
-    <div class="label">Ton narratif</div>
-    <div class="flex g1 mb2">
-      <button class="choice-btn ${st.ton==='Mystérieux'?'active':''}" data-ton="Mystérieux">🌑 Mystérieux</button>
-      <button class="choice-btn ${st.ton==='Papa Conteur'?'active':''}" data-ton="Papa Conteur">🔥 Papa Conteur</button>
-    </div>
-    <div class="label">Modèle image</div>
-    <div class="flex g1 mb2">
-      <button class="choice-btn ${(st.imgModel||'schnell')==='schnell'?'active':''}" data-imod="schnell">⚡ Schnell</button>
-      <button class="choice-btn ${st.imgModel==='pro'?'active':''}" data-imod="pro">🌟 Pro (SD-XL)</button>
-    </div>
-    <div class="label">Script</div>
-    <textarea class="textarea" id="f-escript" placeholder="Écris ton histoire ici…">${st.script}</textarea>
-    ${st.err?`<div class="alert ae">${st.err}</div>`:''}
-    <button class="btn btn-gold mt1" id="b-enrich" ${st.busy?'disabled':''}>
-      ${st.busy?'<div class="spin"></div>':'✨ Enrichir avec l\'IA'}
-    </button>
-    <button class="btn btn-primary mt1" id="b-s1next" ${st.script.trim()?'':'disabled'}>
-      Continuer →
-    </button>`;
-
-  }else if(st.step===2){
-    body=`
-    <div class="tc mb2">
-      <div style="font-size:2.2rem;margin-bottom:.5rem">🎙</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600">Voix Off</div>
-      <div class="ts tm">Générée via Google TTS</div>
-    </div>
-    ${st.err?`<div class="alert ae">${st.err}</div>`:''}
-    ${st.audioUrl?`
-    <div class="card">
-      <audio controls src="${st.audioUrl}" id="aud-el"></audio>
-      <button class="btn btn-ghost mt1" id="b-reaud" style="width:100%">↺ Regénérer</button>
-    </div>`:`
-    <button class="btn btn-primary" id="b-genaud" ${st.busy?'disabled':''}>
-      ${st.busy?'<div class="spin"></div> Génération…':'🎙 Générer la voix off'}
-    </button>`}
-    <div class="flex g1 mt2">
-      <button class="btn btn-ghost" id="b-s2back" style="flex:1">← Retour</button>
-      <button class="btn btn-primary" id="b-s2next" style="flex:1" ${st.audioUrl?'':'disabled'}>Continuer →</button>
-    </div>`;
-
-  }else if(st.step===3){
+  if(st.step===1)body=`<div class="label">Titre</div><input class="input" id="f-etitle" value="${st.title}" placeholder="Titre"><div class="label mt1">Ton</div><div class="flex g1 mb2"><button class="btn ${st.ton==='Mystérieux'?'btn-p':'btn-o'}" data-ton="Mystérieux" style="flex:1">🌑</button><button class="btn ${st.ton==='Papa Conteur'?'btn-p':'btn-o'}" data-ton="Papa Conteur" style="flex:1">🔥</button></div><div class="label">Modèle</div><div class="flex g1 mb2"><button class="btn ${(st.imgModel||'schnell')==='schnell'?'btn-p':'btn-o'}" data-imod="schnell" style="flex:1">⚡ Schnell</button><button class="btn ${st.imgModel==='pro'?'btn-p':'btn-o'}" data-imod="pro" style="flex:1">🌟 Pro</button></div><div class="label">Script</div><textarea class="textarea" id="f-escript" style="min-height:200px" placeholder="Écris ton histoire...">${st.script}</textarea>${st.err?`<div class="alert ae">${st.err}</div>`:''}<button class="btn btn-g mt1" id="b-enrich" ${st.busy?'disabled':''}>${st.busy?'<div class="spin"></div>':'✨ Enrichir & détecter personnages'}</button><button class="btn btn-p mt1" id="b-s1next" ${st.script.trim()?'':'disabled'}>✅ Suite →</button>`;
+  else if(st.step===2)body=`<div class="tc mb2"><div style="font-size:2rem">🎙</div><h3>Voix Off</h3></div>${st.err?`<div class="alert ae">${st.err}</div>`:''}${st.audioUrl?`<div class="card"><audio controls src="${st.audioUrl}" id="aud-el"></audio><button class="btn btn-o mt1" id="b-reaud" style="width:100%">↺</button></div>`:`<button class="btn btn-p" id="b-genaud" ${st.busy?'disabled':''}>${st.busy?'<div class="spin"></div>':'🎙 Générer'}</button>`}<div class="flex g1 mt2"><button class="btn btn-o" id="b-s2back" style="flex:1">←</button><button class="btn btn-p" id="b-s2next" style="flex:1" ${st.audioUrl?'':'disabled'}>✅ Suite →</button></div>`;
+  else if(st.step===3){
     const done=st.segs.filter(s=>s.status==='done').length,tot=st.segs.length||4;
-    body=`
-    <div class="alert ai" style="margin-bottom:1rem">
-      <span>⚡</span> Cloudflare Workers AI — 10 000 générations gratuites/jour
-    </div>
-    <div class="flex jb ic mb1">
-      <span id="img-ctr" class="ts" style="color:var(--smoke)">${done}/${tot} prêtes</span>
-      <button class="btn btn-primary" id="b-genimgs" style="padding:.5rem 1rem;font-size:.82rem;width:auto" ${st.busy?'disabled':''}>
-        ${st.busy?'<div class="spin"></div>':'⚡ Générer tout'}
-      </button>
-    </div>
-    ${st.busy?`<div class="pbar"><div class="pfill" id="img-pb" style="width:${done/tot*100}%"></div></div>`:''}
-    <div class="igrid">${(st.segs.length>0?st.segs:Array(tot).fill(null)).map((seg,i)=>`
-      <div class="islot ${seg?.status||''}" id="slot-${i}">
-        ${seg&&seg.status==='done'?
-          `<img src="${seg.url}" alt=""><div class="iover"><button class="btn btn-dark" style="width:auto;padding:.45rem .9rem;font-size:.78rem" onclick="regenImg(${i})">↺</button><label class="btn btn-dark" style="width:auto;padding:.45rem .9rem;font-size:.78rem;cursor:pointer">📁<input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)"></label></div>`:
-          seg&&seg.status==='loading'?
-          `<div class="ibody"><div class="spin"></div><span class="ts tm ibadge" style="font-size:.7rem;margin-top:.3rem">Génération…</span></div>`:
-          `<div class="ibody" style="opacity:.2"><span style="font-size:2rem;font-family:'Cormorant Garamond',serif;color:var(--smoke3)">${i+1}</span></div>`}
-      </div>`).join('')}
-    </div>
-    <div class="flex g1 mt2">
-      <button class="btn btn-ghost" id="b-s3back" style="flex:1">← Retour</button>
-      <button class="btn btn-primary" id="b-s3next" style="flex:1" ${done>0?'':'disabled'}>Continuer →</button>
-    </div>`;
-
+    body=`<div class="alert ai"><span>ℹ️</span><span class="ts">Cloudflare Workers AI — images générées avec le personnage principal</span></div><div class="flex jb ic mb1"><span id="img-ctr" class="ts">${done}/${tot} prêtes</span><button class="btn btn-p" id="b-genimgs" style="padding:.5rem 1rem;font-size:.8rem" ${st.busy?'disabled':''}>${st.busy?'<div class="spin"></div>':'⚡ Générer'}</button></div>${st.busy?`<div class="pbar"><div class="pfill" id="img-pb" style="width:${done/tot*100}%"></div></div>`:''}<div class="igrid">${(st.segs.length>0?st.segs:Array(tot).fill(null)).map((seg,i)=>`<div class="islot ${seg?.status||''}" id="slot-${i}">${seg&&seg.status==='done'?`<img src="${seg.url}" alt=""><div class="iover"><button class="btn btn-p" style="width:auto;padding:.5rem 1rem;font-size:.8rem" onclick="regenImg(${i})">↺</button><label class="btn btn-b" style="width:auto;padding:.5rem 1rem;font-size:.8rem;cursor:pointer">📁<input type="file" accept="image/*" style="display:none" onchange="importImg(${i},this)"></label></div>`:seg&&seg.status==='loading'?`<div class="ibody"><div class="spin"></div></div>`:`<div class="ibody" style="opacity:.3"><span style="font-size:2rem;font-family:'Playfair Display',serif;color:var(--brown)">${i+1}</span></div>`}</div>`).join('')}</div><div class="flex g1 mt2"><button class="btn btn-o" id="b-s3back" style="flex:1">←</button><button class="btn btn-p" id="b-s3next" style="flex:1" ${done>0?'':'disabled'}>✅ Suite →</button></div>`;
   }else{
     const ready=st.segs.filter(s=>s.status==='done'&&s.url).map(s=>s.url);
-    body=`
-    ${st.err?`<div class="alert ae">${st.err}</div>`:''}
-    <div class="card card-glow">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--gold2);margin-bottom:1rem">🎬 Montage final</div>
-      <div class="flex g2 mb2" style="color:var(--smoke2);font-size:.82rem">
-        <span>📸 ${ready.length} image${ready.length>1?'s':''}</span>
-        <span>•</span>
-        <span>🎙 ${st.audioDur?Math.round(st.audioDur)+'s':'OK'}</span>
-        <span>•</span>
-        <span>📐 576×1024</span>
-      </div>
-      ${st.vidUrl?`
-      <div class="alert as mb1">✅ Vidéo prête à télécharger !</div>
-      <video src="${st.vidUrl}" controls></video>
-      <a href="${st.vidUrl}" download="papa_conteur.webm" class="btn btn-primary">⬇️ Télécharger la vidéo</a>
-      <button class="btn btn-ghost mt1" id="b-revid" style="width:100%">↺ Refaire</button>`:`
-      ${st.busy?`
-      <div class="pbar"><div class="pfill" id="vpb" style="width:0%"></div></div>
-      <p class="ts tm tc" id="vtxt" style="margin-bottom:.75rem">Préparation…</p>`:''
-      }
-      <button class="btn btn-primary" id="b-genvid" ${st.busy?'disabled':''}>
-        ${st.busy?'<div class="spin"></div> Montage en cours…':'🎬 Créer la vidéo'}
-      </button>`}
-    </div>
-    <div class="flex g1 mt2">
-      <button class="btn btn-ghost" id="b-s4back" style="flex:1">← Retour</button>
-      <button class="btn btn-gold" id="b-newep2" style="flex:1">🔄 Nouvel épisode</button>
-    </div>`;
+    body=`${st.err?`<div class="alert ae">${st.err}</div>`:''}<div class="card"><h3 style="color:var(--gold);margin-bottom:1rem">🎬 Montage</h3><div class="flex g1 mb2 ts tm"><span>📸 ${ready.length} img</span><span>•</span><span>🎙 ${st.audioDur?Math.round(st.audioDur)+'s':'OK'}</span></div>${st.vidUrl?`<div class="alert as mb1">✅ Prêt!</div><video src="${st.vidUrl}" controls style="width:100%;border-radius:.8rem;margin-bottom:1rem;max-height:50vh"></video><a href="${st.vidUrl}" download="papa_conteur.webm" class="btn btn-p">⬇️ Télécharger</a><button class="btn btn-o mt1" id="b-revid" style="width:100%">↺</button>`:`${st.busy?`<div class="pbar"><div class="pfill" id="vpb" style="width:0%"></div></div><p class="ts tm tc" id="vtxt">...</p>`:''}<button class="btn btn-p mt1" id="b-genvid" ${st.busy?'disabled':''}>${st.busy?'<div class="spin"></div>':'🎬 Créer vidéo'}</button>`}</div><div class="flex g1 mt2"><button class="btn btn-o" id="b-s4back" style="flex:1">←</button><button class="btn btn-g" id="b-newep2" style="flex:1">🔄 Nouveau</button></div>`;
   }
-
-  const stepHtml=`<div class="stepper">${steps.map((s,i)=>`
-    <div class="step-node">
-      <div class="step-circle ${st.step>s.n?'done':st.step===s.n?'active':'idle'}">${st.step>s.n?'✓':s.n}</div>
-      <span class="step-label">${s.l}</span>
-    </div>
-    ${i<3?`<div class="step-line ${st.step>s.n?'done':'idle'}"></div>`:''}`).join('')}</div>`;
-
-  return`
-  <div class="nav">
-    <button class="nav-back" id="b-backproj">←</button>
-    <div>
-      <div class="nav-title">${e?.title||'Nouvel épisode'}</div>
-      <div class="nav-sub">${p?.name||''}</div>
-    </div>
-  </div>
-  <div style="padding:1.2rem">
-    ${stepHtml}
-    ${body}
-  </div>`;
+  return`<div style="background:var(--bg2);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;border-bottom:1px solid rgba(196,146,58,.15)"><button id="b-backproj" style="background:var(--brown);border:none;color:var(--text2);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.1rem">←</button><div><span style="font-family:'Playfair Display',serif;font-size:1.1rem">${e?.title||'Nouvel épisode'}</span><div class="ts tm">${p?.name||''}</div></div></div><div style="padding:1.5rem"><div class="flex ic" style="margin-bottom:1.5rem">${steps.map((s,i)=>`<div style="display:flex;align-items:center;flex:1"><div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;${st.step>s.n?'background:var(--gold);color:#0D0A08':st.step===s.n?'background:var(--primary);color:#fff':'background:var(--brown);color:var(--text3)'}">${st.step>s.n?'✓':s.n}</div><span style="font-size:.6rem;color:var(--text3);text-transform:uppercase;font-weight:700">${s.l}</span></div>${i<3?`<div style="flex:1;height:2px;background:${st.step>s.n?'var(--gold)':'var(--brown)'};margin-bottom:1rem"></div>`:''}</div>`).join('')}</div>${body}</div>`;
 }
 
-// ─── EVENTS ───────────────────────────
 function on(id,ev,fn){const el=$(id);if(el)el.addEventListener(ev,fn);}
 function bindEvents(){
+  on('b-savegemini','click',()=>{const k=$('gkey').value.trim();if(!k.startsWith('AIza')){alert('Clé invalide');return;}localStorage.setItem('pc_key',k);alert('✅ Gemini OK');render();});
+  on('b-savecftoken','click',()=>{const k=$('cftoken').value.trim();localStorage.setItem('pc_cf_token',k);alert('✅ Token CF OK');render();});
+  on('b-savecfaccount','click',()=>{const k=$('cfaccount').value.trim();localStorage.setItem('pc_cf_account',k);alert('✅ Account ID OK');render();});
   on('b-newproj','click',()=>{const n=prompt('Nom de la série:');if(!n)return;S.projects.unshift({id:uid(),name:n,characters:[],episodes:[],seed:Math.floor(10000+Math.random()*90000)});save();S.projId=S.projects[0].id;S.view='project';render();});
   document.querySelectorAll('[data-open]').forEach(el=>el.onclick=()=>{S.projId=el.dataset.open;S.view='project';render();});
-  document.querySelectorAll('[data-del]').forEach(el=>el.onclick=e=>{e.stopPropagation();if(confirm('Supprimer cette série ?')){S.projects=S.projects.filter(p=>p.id!==el.dataset.del);save();render();}});
+  document.querySelectorAll('[data-del]').forEach(el=>el.onclick=()=>{if(confirm('Supprimer?')){S.projects=S.projects.filter(p=>p.id!==el.dataset.del);save();render();}});
   on('b-home','click',()=>{S.view='home';render();});
-  on('b-addchar','click',()=>{const n=prompt('Nom du personnage:');if(!n)return;const d=prompt('Description (en anglais pour les images):');if(!d)return;const r=prompt('Rôle (Principal / Secondaire):')||'Principal';const p=proj();if(!p)return;p.characters.push({id:uid(),name:n,role:r,description:d});save();render();});
-  document.querySelectorAll('[data-dc]').forEach(el=>el.onclick=()=>{const p=proj();if(!p)return;p.characters=p.characters.filter(c=>c.id!==el.dataset.dc);save();render();});
   on('b-newep','click',()=>{const p=proj();if(!p)return;const e={id:uid(),title:'Épisode '+(p.episodes.length+1),script:'',audioUrl:null,images:[],videoUrl:null};p.episodes.push(e);save();S.epId=e.id;S.studio=fresh();S.view='studio';render();});
   document.querySelectorAll('[data-oe]').forEach(el=>el.onclick=()=>{S.epId=el.dataset.oe;const e=ep();if(!e)return;S.studio=fresh();S.studio.title=e.title||'';S.studio.script=e.script||'';if(e.audioUrl)S.studio.audioUrl=e.audioUrl;if(e.images?.length)S.studio.segs=e.images.map(i=>({text:i.text||'',prompt:'',url:i.url||'',status:i.url?'done':'idle'}));S.view='studio';render();});
   document.querySelectorAll('[data-ton]').forEach(b=>b.onclick=()=>{S.studio.ton=b.dataset.ton;render();});
   document.querySelectorAll('[data-imod]').forEach(b=>b.onclick=()=>{S.studio.imgModel=b.dataset.imod;render();});
   on('f-etitle','input',e=>S.studio.title=e.target.value);
   on('f-escript','input',e=>{S.studio.script=e.target.value;const b=$('b-s1next');if(b)b.disabled=!e.target.value.trim();});
-  on('b-enrich','click',async()=>{const sc=$('f-escript').value.trim()||S.studio.script;if(!sc)return;S.studio.busy=true;S.studio.err=null;render();try{S.studio.script=await enrichScript(sc,S.studio.ton,proj()?.characters||[]);}catch(e){S.studio.err=e.message;}S.studio.busy=false;render();});
+  on('b-enrich','click',async()=>{
+    const sc=$('f-escript').value.trim()||S.studio.script;if(!sc)return;
+    S.studio.busy=true;S.studio.err=null;render();
+    try{
+      const p=proj();
+      const {enriched, characters} = await enrichAndDetectCharacters(sc, S.studio.ton, p?.characters||[]);
+      S.studio.script = enriched;
+      // Mettre à jour les personnages du projet
+      if(p && characters.length > 0){
+        // Fusionne avec les existants (remplace si même nom, ajoute sinon)
+        characters.forEach(newChar => {
+          const existing = p.characters.find(c => c.name.toLowerCase() === newChar.name.toLowerCase());
+          if(existing){
+            existing.role = newChar.role;
+            existing.description = newChar.description;
+          } else {
+            p.characters.push({id: uid(), name: newChar.name, role: newChar.role, description: newChar.description});
+          }
+        });
+        save();
+      }
+    }catch(e){S.studio.err=e.message;}
+    S.studio.busy=false;render();
+  });
   on('b-s1next','click',()=>{S.studio.title=$('f-etitle').value||S.studio.title;S.studio.script=$('f-escript').value||S.studio.script;patchEp({title:S.studio.title,script:S.studio.script});S.studio.step=2;render();});
   on('b-genaud','click',async()=>{S.studio.busy=true;S.studio.err=null;render();try{const b=await genAudio();const u=URL.createObjectURL(b);S.studio.audioBlob=b;S.studio.audioUrl=u;patchEp({audioUrl:u});}catch(e){S.studio.err='Audio: '+e.message;}S.studio.busy=false;render();setTimeout(()=>{const a=$('aud-el');if(a)a.onloadedmetadata=()=>{S.studio.audioDur=a.duration;};},100);});
   on('b-reaud','click',()=>{S.studio.audioUrl=null;S.studio.audioBlob=null;render();});
@@ -711,7 +510,7 @@ function bindEvents(){
   on('b-genimgs','click',doGenImgs);
   on('b-s3back','click',()=>{S.studio.step=2;render();});
   on('b-s3next','click',()=>{S.studio.step=4;render();});
-  on('b-genvid','click',async()=>{const urls=S.studio.segs.filter(s=>s.status==='done'&&s.url).map(s=>s.url);if(!urls.length){alert('Aucune image disponible');return;}if(!S.studio.audioBlob){alert('Génère d\'abord la voix off (étape 2)');return;}S.studio.busy=true;S.studio.err=null;render();try{const b=await genVideo(urls,S.studio.audioBlob,(pct,msg)=>{const pb=$('vpb'),pt=$('vtxt');if(pb)pb.style.width=pct+'%';if(pt)pt.textContent=msg;});S.studio.vidBlob=b;S.studio.vidUrl=URL.createObjectURL(b);patchEp({videoUrl:S.studio.vidUrl});}catch(e){S.studio.err='Vidéo: '+e.message;}S.studio.busy=false;render();});
+  on('b-genvid','click',async()=>{const urls=S.studio.segs.filter(s=>s.status==='done'&&s.url).map(s=>s.url);if(!urls.length){alert('Aucune image');return;}if(!S.studio.audioBlob){alert('Aucun audio');return;}S.studio.busy=true;S.studio.err=null;render();try{const b=await genVideo(urls,S.studio.audioBlob,(pct,msg)=>{const pb=$('vpb'),pt=$('vtxt');if(pb)pb.style.width=pct+'%';if(pt)pt.textContent=msg;});S.studio.vidBlob=b;S.studio.vidUrl=URL.createObjectURL(b);patchEp({videoUrl:S.studio.vidUrl});}catch(e){S.studio.err='Vidéo: '+e.message;}S.studio.busy=false;render();});
   on('b-revid','click',()=>{S.studio.vidUrl=null;S.studio.vidBlob=null;render();});
   on('b-s4back','click',()=>{S.studio.step=3;render();});
   on('b-newep2','click',()=>{S.view='project';S.epId=null;S.studio=fresh();render();});
